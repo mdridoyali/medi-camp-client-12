@@ -9,6 +9,7 @@ import router from './Routes/Routes';
 import AuthProvider from './Provider/AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from "@material-tailwind/react";
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <ThemeProvider>
         <AuthProvider>
+          <Toaster/>
           <RouterProvider router={router} />
         </AuthProvider>
       </ThemeProvider>

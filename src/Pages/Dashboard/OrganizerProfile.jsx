@@ -1,9 +1,10 @@
+import SectionHeading from "../../Components/sectionHeading";
 
 
 const OrganizerProfile = () => {
     return (
         <div>
-            organize
+            <SectionHeading heading={'Organizer profile'} ></SectionHeading>
         </div>
     );
 };
