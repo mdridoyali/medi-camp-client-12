@@ -13,8 +13,6 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import auth from "../../firebase.config";
 
 
-
-
 export const AuthContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
@@ -22,25 +20,25 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic()
   const googleProvider = new GoogleAuthProvider;
   const [user, setUser] = useState(null);
-  const [loader, setLoader] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
-    setLoader(true);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const logInUser = (email, password) => {
-    setLoader(true);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const googleLogin = () => {
-    setLoader(true)
+    setLoading(true)
     return signInWithPopup(auth, googleProvider)
   };
 
   const logOutUser = () => {
-    setLoader(true);
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -72,7 +70,7 @@ const AuthProvider = ({ children }) => {
       //   setLoader(false);
       // }
 
-     
+
     });
     return () => {
       return unSubscribe();
@@ -81,7 +79,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
-    loader,
+    loading,
     createUser,
     logInUser,
     logOutUser,

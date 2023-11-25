@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 
 
-const OrganizerPage = () => {
+const ParticipantPage = () => {
     const {user} = useAuth()
     return (
         <div className="drawer-content">
@@ -12,46 +12,46 @@ const OrganizerPage = () => {
                 <div className='flex justify-end'> <label htmlFor="my-drawer-2" aria-label="close sidebar" className=" btn btn-sm md:hidden rounded-full bg-base-100 w-11 h-11 text-xl drawer-overlay"><FaMinus /></label></div>
                 <Link to={'/'}><img className='w-14 h-13' src={'https://i.ibb.co/FzwdnpL/Screenshot-1.jpg'} /></Link>
                 <NavLink
-                    to={"/dashboard/organizer-profile"}
+                    to={"/dashboard/participant-profile"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
                             : "btn btn-ghost  btn-active rounded-full "
                     }
                 >
-                    Organizer Profile
+                    Participant Profile
                 </NavLink>
                 <NavLink
-                    to={"/dashboard/add-a-camp"}
+                    to={"/dashboard/registered-camps"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
                             : "btn btn-ghost  btn-active rounded-full "
                     }
                 >
-                    Add A Camp
+                    Registered Camps
                 </NavLink>
                 <NavLink
-                    to={"/dashboard/manage-camps"}
+                    to={"/dashboard/payment-history"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
                             : "btn btn-ghost  btn-active rounded-full "
                     }
                 >
-                    Manage Camps
+                    Payment History
                 </NavLink>
                 <NavLink
-                    to={"/dashboard/manage-registered-camps"}
+                    to={"/dashboard/rating"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
                             : "btn btn-ghost  btn-active rounded-full "
                     }
                 >
-                    Manage Register Camps
+                    Feedback and Rating
                 </NavLink>
-                
+
                 <hr />
                 <Link to={"/"}  className="btn btn-outline rounded-full flex items-center gap-5 justify-center text-xl "><FaHome /> <p >  Home </p></Link>
                 <div className="flex gap-3 items-center text-base font-semibold">
@@ -67,4 +67,4 @@ const OrganizerPage = () => {
     );
 };
 
-export default OrganizerPage;
+export default ParticipantPage;

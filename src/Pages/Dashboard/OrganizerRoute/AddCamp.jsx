@@ -49,12 +49,12 @@ const AddCamp = () => {
 
 
     return (
-        <div className="px-2 md:px-5 mb-14">
+        <div className="px-2 md:px-5 mb-14 overflow-x-scroll">
               <Helmet>
                 <title>MediCamp | Add Camp</title>
             </Helmet>
             <SectionHeading heading={'Add A Camp'} ></SectionHeading>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 overflow-x-scroll w-[95vw]  font-bold md:font-normal " >
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
@@ -135,7 +135,7 @@ const AddCamp = () => {
 
 
                 {/* row 4 image and time*/}
-                <div className="flex  md:flex-row w-full gap-5">
+                <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
                             <span className="label-text">Choose an Image</span>

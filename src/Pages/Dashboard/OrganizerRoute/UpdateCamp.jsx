@@ -9,14 +9,17 @@ import { Helmet } from 'react-helmet-async';
 import useAuth from "../../../Hooks/useAuth";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../Components/Loading";
+
+
 const UpdateCamp = () => {
     const { user } = useAuth()
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure()
     const { id } = useParams()
 
-    const { data: camp = {} } = useQuery({
+    const { data: camp = {}, isLoading } = useQuery({
         queryKey: ['camp'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/camp/${id}`)
@@ -58,7 +61,7 @@ const UpdateCamp = () => {
         }
 
     }
-
+    if (isLoading) return <Loading />
 
     return (
         <div className="px-2 md:px-5 mb-14">
