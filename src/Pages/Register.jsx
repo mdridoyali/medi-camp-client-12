@@ -101,7 +101,7 @@ const Register = () => {
                                 </span>
                             </div>
                         </div>
-                        <button type="submit" className="mt-6 w-full text-white p-1 bg-blue-700" fullWidth>
+                        <button type="submit" className="mt-6 w-full text-white p-1 bg-blue-700">
                             Register
                         </button>
 
