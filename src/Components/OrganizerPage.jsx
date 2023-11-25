@@ -29,6 +29,26 @@ const OrganizerPage = () => {
                 >
                     Add A Camp
                 </NavLink>
+                <NavLink
+                    to={"/dashboard/manage-camps"}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn bg-lime-600 rounded-full text-white"
+                            : "btn btn-ghost  btn-active rounded-full "
+                    }
+                >
+                    Manage Camps
+                </NavLink>
+                <NavLink
+                    to={"/dashboard/manage-registered-camps"}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn bg-lime-600 rounded-full text-white"
+                            : "btn btn-ghost  btn-active rounded-full "
+                    }
+                >
+                    Manage Register Camps
+                </NavLink>
             </ul>
 
         </div>

@@ -10,20 +10,24 @@ import AuthProvider from './Provider/AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from "@material-tailwind/react";
 import { Toaster } from 'react-hot-toast';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <ThemeProvider>
         <AuthProvider>
-          <Toaster/>
+          <Toaster />
           <RouterProvider router={router} />
         </AuthProvider>
       </ThemeProvider>
     </HelmetProvider>
-  </React.StrictMode>,
+  </QueryClientProvider>
+
+  // </React.StrictMode>,
 )

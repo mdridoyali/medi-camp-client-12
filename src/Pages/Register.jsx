@@ -47,6 +47,7 @@ const Register = () => {
                         const userInfo = {
                             name: name,
                             email: email,
+                            role: "user",
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
@@ -70,7 +71,7 @@ const Register = () => {
     return (
         <div className="mx-auto flex w-11/12 items-center justify-center my-10">
             <Helmet>
-                <title>Daily Dine | Register</title>
+                <title>MediCamp | Register</title>
             </Helmet>
             <div className="">
                 <Card color="transparent" shadow={false}>
@@ -82,11 +83,12 @@ const Register = () => {
                         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
                     >
                         <div className="mb-1 flex flex-col gap-6">
-                            <input name="name" type="text" placeholder="Name" label="Your Name" className="border p-1" />
-                            <input name="email" type="email" placeholder="Email" label="Your Email"  className="border p-1" />
-                            <input name="photo" type="text" placeholder="Photo url" label="Photo URL"  className="border p-1" />
+                            <input required name="name" type="text" placeholder="Name" label="Your Name" className="border p-1" />
+                            <input required  name="email" type="email" placeholder="Email" label="Your Email" className="border p-1" />
+                            <input required  name="photo" type="text" placeholder="Photo url" label="Photo URL" className="border p-1" />
                             <div className="relative ">
                                 <input
+                                    required 
                                     name="password"
                                     placeholder="Password"
                                     type={show ? "text" : "password"}

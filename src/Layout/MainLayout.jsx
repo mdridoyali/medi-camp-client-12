@@ -222,7 +222,7 @@ const MainLayout = ({ children }) => {
             </NavLink> 
             <NavLink
               onClick={closeSidebar}
-              to={"/Dashboard"}
+              to={"/dashboard/organizer-profile"}
               className={({ isActive }) =>
                 isActive
                   ? "btn bg-lime-600 rounded-full text-white"

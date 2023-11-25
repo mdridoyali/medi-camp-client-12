@@ -1,25 +1,40 @@
 const image_hoisting_key = import.meta.env.VITE_IMG_HOISTING_KEY
 const image_hoisting_api = `https://api.imgbb.com/1/upload?key=${image_hoisting_key}`
 import { useForm } from "react-hook-form"
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import SectionHeading from "../../Components/sectionHeading";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import SectionHeading from "../../../Components/sectionHeading";
 import toast from "react-hot-toast";
-import useAxiosSecure from './../../Hooks/useAxiosSecure';
-const AddCamp = () => {
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
+import useAuth from "../../../Hooks/useAuth";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+const UpdateCamp = () => {
+    const { user } = useAuth()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure()
+    const { id } = useParams()
 
+    const { data: camp = {} } = useQuery({
+        queryKey: ['camp'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/camp/${id}`)
+            return res.data
+        }
+    })
+    const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, } = camp
+    // console.log(camp)
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
-       
+         console.log(data)
         const res = await axiosPublic.post(image_hoisting_api, imageFile, {
             headers: {
                 'content-type': ' multipart/form-data'
             }
         })
-        if(res.data.success){
+        if (res.data.success) {
             // now send the menu item to the database with the image url
             const campItem = {
                 campName: data.campName,
@@ -27,17 +42,18 @@ const AddCamp = () => {
                 location: data.location,
                 specializedService: data.specializedService,
                 healthProfessional: data.healthProfessional,
-                audience:data.audience,
+                audience: data.audience,
                 image: res.data.data.display_url,
                 scheduleDate: data.scheduleDate,
                 description: data.description,
+                email: user?.email
             }
-           console.log(campItem)
-           const campRes = await axiosSecure.post('/add-a-camp', campItem);
-           console.log(campRes.data)
-           if(campRes.data.insertedId){
-             toast.success(`Camp Added Success`)
-           }
+            console.log(campItem)
+            const campRes = await axiosSecure.put(`/camp/${id}`, campItem);
+            console.log(campRes.data)
+            if (campRes.data.modifiedCount > 0) {
+                toast.success(`Camp Update Success`)
+            }
 
         }
 
@@ -45,9 +61,12 @@ const AddCamp = () => {
 
 
     return (
-        <div className="px-2 md:px-5">
-            <SectionHeading heading={'Add A Camp'} ></SectionHeading>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
+        <div className="px-2 md:px-5 mb-14">
+            <Helmet>
+                <title>MediCamp | Update Camp</title>
+            </Helmet>
+            <SectionHeading heading={'Update A Camp'} ></SectionHeading>
+           { camp && <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
@@ -55,8 +74,9 @@ const AddCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("campName", { required: true })}
-                            placeholder="Camp Name"
+                            {...register("campName",{ required: true } )}
+                            // placeholder="Camp Name"
+                            defaultValue={campName}
                             className="input input-bordered" />
                         {errors.campName && <span className="text-red-600">Name is required</span>}
                     </div>
@@ -66,8 +86,8 @@ const AddCamp = () => {
                         </label>
                         <input
                             type="number"
-                            {...register("campFees", { required: true })}
-                            placeholder="Camp Fees"
+                            {...register("campFees",{ required: true } )}
+                            defaultValue={campFees}
                             className="input input-bordered" />
                         {errors.campFees && <span className="text-red-600">Photo URL is required</span>}
                     </div>
@@ -83,7 +103,7 @@ const AddCamp = () => {
                         <input
                             type="text"
                             {...register("location", { required: true })}
-                            placeholder="Venue Location"
+                            defaultValue={location}
                             className="input input-bordered" />
                         {errors.location && <span className="text-red-600">Name is required</span>}
                     </div>
@@ -93,8 +113,8 @@ const AddCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("specializedService", { required: true })}
-                            placeholder="Specialized Services Provided"
+                            {...register("specializedService",{ required: true } )}
+                            defaultValue={specializedService}
                             className="input input-bordered" />
                         {errors.specializedService && <span className="text-red-600">Specialized is required</span>}
                     </div>
@@ -108,8 +128,8 @@ const AddCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("healthProfessional", { required: true })}
-                            placeholder="Healthcare Professionals"
+                            {...register("healthProfessional",{ required: true } )}
+                            defaultValue={healthProfessional}
                             className="input input-bordered" />
                         {errors.healthProfessional && <span className="text-red-600">Healthcare is required</span>}
                     </div>
@@ -119,8 +139,8 @@ const AddCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("audience", { required: true })}
-                            placeholder="Targeted Audience"
+                            {...register("audience",{ required: true } )}
+                            defaultValue={audience}
                             className="input input-bordered" />
                         {errors.audience && <span className="text-red-600">Targeted Audience is required</span>}
                     </div>
@@ -136,6 +156,7 @@ const AddCamp = () => {
                         <input
                             type="file"
                             {...register('image', { required: true })}
+                            defaultValue={image}
                             className="file-input input-bordered   " />
                         {errors.image && <span className="text-red-600">Image is required</span>}
                     </div>
@@ -146,7 +167,8 @@ const AddCamp = () => {
                         <input
                             type="datetime-local"
                             id="dateTimePicker"
-                            {...register("scheduleDate", { required: true })}
+                            {...register("scheduleDate",{ required: true } )}
+                            defaultValue={scheduleDate}
                             className="input input-bordered" />
                         {errors.scheduleDate && <span className="text-red-600">Scheduled Date Required</span>}
                     </div>
@@ -158,21 +180,21 @@ const AddCamp = () => {
                         <span className="label-text">Comprehensive Description</span>
                     </label>
                     <textarea
-                        {...register("description", { required: true })}
-                        placeholder="Comprehensive Description"
+                        {...register("description",{ required: true } )}
+                        defaultValue={description}
                         className="input input-bordered h-32" ></textarea>
                     {errors.description && <span className="text-red-600">Description Required</span>}
                 </div>
 
 
                 <div className="form-control pt-5">
-                    <input className="btn btn-primary" type="submit" value="Add Camp" />
+                    <input className="btn btn-primary" type="submit" value="Update Camp" />
                 </div>
-            </form>
+            </form>}
         </div>
     );
 };
 
-export default AddCamp;
+export default UpdateCamp;
 
 
