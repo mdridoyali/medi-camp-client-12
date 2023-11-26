@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Components/Loading";
 
-
 const UpdateCamp = () => {
     const { user } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -27,7 +26,8 @@ const UpdateCamp = () => {
         }
     })
     const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, } = camp
-    // console.log(camp)
+    console.log(id)
+    console.log(camp)
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
@@ -69,7 +69,7 @@ const UpdateCamp = () => {
                 <title>MediCamp | Update Camp</title>
             </Helmet>
             <SectionHeading heading={'Update A Camp'} ></SectionHeading>
-           { camp && <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
+         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
@@ -159,7 +159,9 @@ const UpdateCamp = () => {
                         <input
                             type="file"
                             {...register('image', { required: true })}
-                            defaultValue={image}
+                            // defaultValue={image}
+                            // value={image}
+                            // onChange={(e) => setValue('image', e.target.files[0])}
                             className="file-input input-bordered   " />
                         {errors.image && <span className="text-red-600">Image is required</span>}
                     </div>
@@ -193,7 +195,7 @@ const UpdateCamp = () => {
                 <div className="form-control pt-5">
                     <input className="btn btn-primary" type="submit" value="Update Camp" />
                 </div>
-            </form>}
+            </form>
         </div>
     );
 };

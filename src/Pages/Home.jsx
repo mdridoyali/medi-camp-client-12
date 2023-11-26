@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../Components/Banner";
 
 
 const Home = () => {
     return (
-        <div>
+        <div  className="min-h-[60vh]">
+            <Helmet><title>MediCamp</title></Helmet>
             <Banner/>
           
         </div>
@@ -11,3 +13,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

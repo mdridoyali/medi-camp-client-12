@@ -1,9 +1,12 @@
+import { Helmet } from "react-helmet-async";
 
 
 const ContactUs = () => {
     return (
-        <div>
+        <div className="min-h-[60vh]">
+            <Helmet><title>MediCamp | ContactUs Camp</title></Helmet>
             Contact
+
         </div>
     );
 };

@@ -12,63 +12,70 @@ import ManageCamp from "../Pages/Dashboard/OrganizerRoute/ManageCamp";
 import ManageRegisteredCamp from "../Pages/Dashboard/OrganizerRoute/ManageRegisteredCamp";
 import UpdateCamp from "../Pages/Dashboard/OrganizerRoute/UpdateCamp";
 import ErrorPage from './../Components/ErrorPage';
+import PrivetRoutes from "./PrivetRoutes";
+import CampDetails from "../Pages/CampDetails";
 
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App/>,
-      errorElement: <ErrorPage/>,
-      children:[
-        {
-          path: '/',
-          element: <Home/>
-        },
-        {
-          path: 'available-camp',
-          element: <AvailableCamp/>
-        },
-        {
-          path: 'contact-us',
-          element: <ContactUs/>
-        },
-      ]
-    },
-    {
-        path: 'dashboard',
-        element: <Dashboard/>,
-        children:[
-            {
-              path: 'organizer-profile',
-              element: <OrganizerProfile/>
-            },
-            {
-              path: 'add-a-camp',
-              element: <AddCamp/>
-            },
-            {
-              path: 'manage-camps',
-              element: <ManageCamp/>
-            },
-            {
-              path: 'manage-registered-camps',
-              element: <ManageRegisteredCamp/>
-            },
-            {
-              path: 'update-camp/:id',
-              element: <UpdateCamp/>,
-              loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
-            },
-        ]
-    },
-    {
-        path: '/login',
-        element: <Login/>
-    },
-    {
-        path: '/register',
-        element: <Register/>
-    }
-  ]);
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: 'available-camp',
+        element: <PrivetRoutes> <AvailableCamp /></PrivetRoutes>
+      },
+      {
+        path: 'camp-details/:id',
+        element: <PrivetRoutes> <CampDetails /></PrivetRoutes>
+      },
+      {
+        path: 'contact-us',
+        element: <ContactUs />
+      },
+    ]
+  },
+  {
+    path: 'dashboard',
+    element: <PrivetRoutes><Dashboard /></PrivetRoutes>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'organizer-profile',
+        element: <OrganizerProfile />
+      },
+      {
+        path: 'add-a-camp',
+        element: <AddCamp />
+      },
+      {
+        path: 'manage-camps',
+        element: <ManageCamp />
+      },
+      {
+        path: 'manage-registered-camps',
+        element: <ManageRegisteredCamp />
+      },
+      {
+        path: 'update-camp/:id',
+        element: <UpdateCamp />,
+        loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
+      },
+    ]
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
+  }
+]);
 
-  export default router
+export default router

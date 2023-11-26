@@ -47,7 +47,7 @@ const MainLayout = ({ children }) => {
             <div className="flex-1   px-2 md:mx-2">
               <img
                 className="w-8 md:w-14"
-                src={"https://i.ibb.co/nM1gpGH/Screenshot-5.jpg"}
+                src={"https://i.ibb.co/NWnH0Jj/Screenshot-7-removebg-preview.png"}
               />
               <h1 className="text-transparent text-2xl md:text-5xl font-bold bg-clip-text bg-gradient-to-r from-violet-600 to-amber-500">
                 MediCamp
