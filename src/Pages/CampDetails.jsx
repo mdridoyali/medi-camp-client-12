@@ -6,13 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
 import Loading from "../Components/Loading";
 import useUser from "../Hooks/useUser";
+import toast from "react-hot-toast";
 
 const CampDetails = () => {
     const { id } = useParams()
     const axiosPublic = useAxiosPublic();
     const [userRole] = useUser()
-
-    console.log(userRole?.role)
 
 
     const { data: camp = {}, isLoading } = useQuery({
@@ -26,21 +25,33 @@ const CampDetails = () => {
     const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id } = camp
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const form = e.target
         const name = e.target.name.value;
         const phoneNumber = e.target.phoneNumber.value;
         const age = e.target.age.value;
         const gender = e.target.gender.value;
         const address = e.target.address.value;
         const healthInfo = e.target.healthInfo.value;
-        const formData = {
-            name, age, gender, phoneNumber, address, healthInfo, campFees
-        }
+        const paymentStatus = 'unpaid';
+        const confirmationStatus = 'pending'
+        const formData = { name, age, gender, phoneNumber, address, healthInfo, campFees, paymentStatus, confirmationStatus }
         console.log(formData)
 
-
+        //  save data to the database
+        try {
+            const res = await axiosPublic.post('/registered-camp', formData);
+            console.log(res.data.insertedId);
+            if (res.data.insertedId) {
+                console.log(res.data.insertedId);
+                toast.success('The Camp is Registered');
+                form.reset();
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            // Handle error, show toast.error, etc.
+        }
     };
 
 
@@ -48,9 +59,6 @@ const CampDetails = () => {
 
 
     if (isLoading) return <Loading />
-
-
-
 
     return (
         <div className="w-11/12 mb-16 md:w-9/12 mx-auto">
@@ -97,12 +105,14 @@ const CampDetails = () => {
                             className="border px-1 py-2 rounded w-full"
                             type="text"
                             placeholder="Name"
+                            required
                         />
                         <input
                             name="phoneNumber"
                             className="border px-1 py-2 rounded w-full"
                             type="number"
                             placeholder="Phone Number"
+                            required
                         />
                         <div className="flex gap-4">
                             <input
@@ -110,10 +120,12 @@ const CampDetails = () => {
                                 className="border px-1 py-2 flex-1 rounded w-full"
                                 type="number"
                                 placeholder="Age"
+                                required
                             />
                             <select
                                 name="gender"
                                 className="border px-1 py-2 flex-1 rounded w-full"
+                                required
                             >
                                 <option disabled>Gender</option>
                                 <option>Male</option>
@@ -127,6 +139,7 @@ const CampDetails = () => {
                                 className="border px-1 py-2 rounded w-full"
                                 type="text"
                                 placeholder="Address"
+                                required
                             />
                             <input
                                 disabled
@@ -142,12 +155,22 @@ const CampDetails = () => {
                         ></textarea>
 
                         <div className="flex justify-between mt-7">
-                            <Button variant="contained" color="primary" type="submit">
-                                Submit
-                            </Button>
-                            <button type="button" className="btn btn-outline">
-                                Cancel
-                            </button>
+
+                            {/* <form method="dialog"> */}
+                                <Button variant="contained" color="primary" type="submit">
+                                    Submit
+                                </Button>
+                            {/* </form> */}
+                            {/* <div className="modal-action"> <form method="dialog">
+                                <button type="button" className="btn btn-outline">
+                                    Cancel
+                                </button>
+                            </form></div> */}
+                            <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+
                         </div>
                     </form>
 

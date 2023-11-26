@@ -14,6 +14,10 @@ import UpdateCamp from "../Pages/Dashboard/OrganizerRoute/UpdateCamp";
 import ErrorPage from './../Components/ErrorPage';
 import PrivetRoutes from "./PrivetRoutes";
 import CampDetails from "../Pages/CampDetails";
+import ParticipantProfile from "../Pages/Dashboard/ParticipantRoute/ParticipantProfile";
+import RegisteredCamp from "../Pages/Dashboard/ParticipantRoute/RegisteredCamp";
+import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/PaymentHistory";
+import Feedback from "../Pages/Dashboard/ParticipantRoute/Feedback";
 
 
 const router = createBrowserRouter([
@@ -45,6 +49,7 @@ const router = createBrowserRouter([
     element: <PrivetRoutes><Dashboard /></PrivetRoutes>,
     errorElement: <ErrorPage />,
     children: [
+      // for Organizer 
       {
         path: 'organizer-profile',
         element: <OrganizerProfile />
@@ -66,8 +71,28 @@ const router = createBrowserRouter([
         element: <UpdateCamp />,
         loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
       },
+      // for Participant
+      {
+        path: 'participant-profile',
+        element: <ParticipantProfile />
+      },
+      {
+        path: 'registered-camps',
+        element: <RegisteredCamp />
+      },
+      {
+        path: 'payment-history',
+        element: <PaymentHistory />
+      },
+      {
+        path: 'feedback',
+        element: <Feedback />
+      },
     ]
   },
+
+
+
   {
     path: '/login',
     element: <Login />

@@ -24,9 +24,6 @@ const AvailableCamp = () => {
     })
     console.log(camps)
 
-    const handleJoinCamp = () => {
-
-    }
     if (isLoading) return <Loading />
 
     return (
@@ -51,7 +48,7 @@ const AvailableCamp = () => {
                             </CardContent>
                             <CardActions>
                                 <Link to={`/camp-details/${item._id}`}>
-                                    <Button variant="contained" color="primary" onClick={() => handleJoinCamp(item)}>
+                                    <Button variant="contained" color="primary" >
                                         See Details
                                     </Button>
                                 </Link>

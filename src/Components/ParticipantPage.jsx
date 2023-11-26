@@ -42,7 +42,7 @@ const ParticipantPage = () => {
                     Payment History
                 </NavLink>
                 <NavLink
-                    to={"/dashboard/rating"}
+                    to={"/dashboard/feedback"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"

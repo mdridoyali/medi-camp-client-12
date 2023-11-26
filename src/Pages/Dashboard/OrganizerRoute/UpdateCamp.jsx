@@ -30,15 +30,16 @@ const UpdateCamp = () => {
     console.log(camp)
 
     const onSubmit = async (data) => {
-        const imageFile = { image: data.image[0] }
-         console.log(data)
-        const res = await axiosPublic.post(image_hoisting_api, imageFile, {
-            headers: {
-                'content-type': ' multipart/form-data'
-            }
-        })
-        if (res.data.success) {
+        // const imageFile = { image: data.image[0] }
+        // const res = await axiosPublic.post(image_hoisting_api, imageFile, {
+        //     headers: {
+        //         'content-type': ' multipart/form-data'
+        //     }
+        // })
+        // if (res.data.success) {
             // now send the menu item to the database with the image url
+         console.log(data)
+
             const campItem = {
                 campName: data.campName,
                 campFees: parseInt(data.campFees),
@@ -46,7 +47,7 @@ const UpdateCamp = () => {
                 specializedService: data.specializedService,
                 healthProfessional: data.healthProfessional,
                 audience: data.audience,
-                image: res.data.data.display_url,
+                image,
                 scheduleDate: data.scheduleDate,
                 description: data.description,
                 email: user?.email
@@ -58,7 +59,7 @@ const UpdateCamp = () => {
                 toast.success(`Camp Update Success`)
             }
 
-        }
+        // }
 
     }
     if (isLoading) return <Loading />
@@ -158,12 +159,13 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="file"
-                            {...register('image', { required: true })}
+                            // disabled
+                            // {...register('image', { required: true })}
                             // defaultValue={image}
                             // value={image}
                             // onChange={(e) => setValue('image', e.target.files[0])}
                             className="file-input input-bordered   " />
-                        {errors.image && <span className="text-red-600">Image is required</span>}
+                        {/* {errors.image && <span className="text-red-600">Image is required</span>} */}
                     </div>
                     <div className="form-control flex-1">
                         <label className="label">
