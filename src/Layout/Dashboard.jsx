@@ -7,7 +7,7 @@ import useUser from '../Hooks/useUser';
 
 const Dashboard = () => {
     const [userRole] = useUser()
-    console.log(userRole?.role)
+    console.log(userRole)
 
     return (
         <div className=' ' >

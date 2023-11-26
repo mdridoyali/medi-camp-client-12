@@ -7,11 +7,13 @@ import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography 
 import Loading from "../Components/Loading";
 import useUser from "../Hooks/useUser";
 import toast from "react-hot-toast";
+import useAuth from "../Hooks/useAuth";
 
 const CampDetails = () => {
     const { id } = useParams()
     const axiosPublic = useAxiosPublic();
     const [userRole] = useUser()
+    const { user } = useAuth()
 
 
     const { data: camp = {}, isLoading } = useQuery({
@@ -35,13 +37,22 @@ const CampDetails = () => {
         const address = e.target.address.value;
         const healthInfo = e.target.healthInfo.value;
         const paymentStatus = 'unpaid';
-        const confirmationStatus = 'pending'
-        const formData = { name, age, gender, phoneNumber, address, healthInfo, campFees, paymentStatus, confirmationStatus }
-        console.log(formData)
+        const confirmationStatus = 'pending';
+        const participant = {
+            email: user?.email,
+            name: user?.displayName
+        }
+      
 
+
+        const registeredInfo = {
+             name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant,  campName, campFees, location,scheduleDate
+        }
+        console.log(registeredInfo)
+        // campInfo: { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, campId: _id }
         //  save data to the database
         try {
-            const res = await axiosPublic.post('/registered-camp', formData);
+            const res = await axiosPublic.post('/registered-camp', registeredInfo);
             console.log(res.data.insertedId);
             if (res.data.insertedId) {
                 console.log(res.data.insertedId);
@@ -157,9 +168,9 @@ const CampDetails = () => {
                         <div className="flex justify-between mt-7">
 
                             {/* <form method="dialog"> */}
-                                <Button variant="contained" color="primary" type="submit">
-                                    Submit
-                                </Button>
+                            <Button variant="contained" color="primary" type="submit">
+                                Submit
+                            </Button>
                             {/* </form> */}
                             {/* <div className="modal-action"> <form method="dialog">
                                 <button type="button" className="btn btn-outline">
