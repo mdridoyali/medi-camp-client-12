@@ -25,9 +25,24 @@ const CampDetails = () => {
 
     const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id } = camp
 
-    const handleJoinCamp = () => {
 
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const phoneNumber = e.target.phoneNumber.value;
+        const age = e.target.age.value;
+        const gender = e.target.gender.value;
+        const address = e.target.address.value;
+        const healthInfo = e.target.healthInfo.value;
+        const formData = {
+            name, age, gender, phoneNumber, address, healthInfo, campFees
+        }
+        console.log(formData)
+
+
+    };
+
 
 
 
@@ -75,14 +90,67 @@ const CampDetails = () => {
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button bsdcvsdcsdcsdfsd fsdf ddfffffffffffffffffffffffffffffffffffffffffffelow t;dka;skd;aosd;oasid;oasdoasdasdasdiasjdiasjdiasjdiasjdo close</p>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
-                        </form>
-                    </div>
+                    <h3 className="font-bold mb-3 text-lg">Fill Up The Join Camp Form!</h3>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <input
+                            name="name"
+                            className="border px-1 py-2 rounded w-full"
+                            type="text"
+                            placeholder="Name"
+                        />
+                        <input
+                            name="phoneNumber"
+                            className="border px-1 py-2 rounded w-full"
+                            type="number"
+                            placeholder="Phone Number"
+                        />
+                        <div className="flex gap-4">
+                            <input
+                                name="age"
+                                className="border px-1 py-2 flex-1 rounded w-full"
+                                type="number"
+                                placeholder="Age"
+                            />
+                            <select
+                                name="gender"
+                                className="border px-1 py-2 flex-1 rounded w-full"
+                            >
+                                <option disabled>Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div className="flex gap-4">
+                            <input
+                                name="address"
+                                className="border px-1 py-2 rounded w-full"
+                                type="text"
+                                placeholder="Address"
+                            />
+                            <input
+                                disabled
+                                className="border px-1 py-2 rounded w-full"
+                                type="text"
+                                defaultValue={campFees}
+                            />
+                        </div>
+                        <textarea
+                            name="healthInfo"
+                            placeholder="Write Here Your Health Related Information"
+                            className="border px-1 py-2 rounded w-full"
+                        ></textarea>
+
+                        <div className="flex justify-between mt-7">
+                            <Button variant="contained" color="primary" type="submit">
+                                Submit
+                            </Button>
+                            <button type="button" className="btn btn-outline">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
             </dialog>
 
