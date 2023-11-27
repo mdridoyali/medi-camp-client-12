@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import OrganizerPage from '../Components/OrganizerPage';
 import ParticipantPage from '../Components/ParticipantPage';
 import useUser from '../Hooks/useUser';
+import HealthProfessionalPage from '../Components/HealthProfessionalPage';
 
 const Dashboard = () => {
     const [userRole] = useUser()
@@ -27,6 +28,9 @@ const Dashboard = () => {
                         }
                         {
                             userRole?.role === 'participant' && <ParticipantPage />
+                        }
+                        {
+                            userRole?.role === 'health professional' && <HealthProfessionalPage />
                         }
 
                     </div>

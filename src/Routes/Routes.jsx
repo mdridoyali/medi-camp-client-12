@@ -94,6 +94,11 @@ const router = createBrowserRouter([
         element: <PrivetRoutes><Payment /></PrivetRoutes>,
         loader: ({ params }) => fetch(`${params.id}`)
       },
+      // for health professional
+      {
+        path: 'feedback',
+        element: <PrivetRoutes><Feedback /></PrivetRoutes>
+      },
     ]
   },
 

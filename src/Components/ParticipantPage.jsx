@@ -4,7 +4,7 @@ import useAuth from "../Hooks/useAuth";
 
 
 const ParticipantPage = () => {
-    const {user} = useAuth()
+    const {user, logOutUser} = useAuth()
     return (
         <div className="drawer-content">
             <ul className="menu px-4 w-72 min-h-screen space-y-5 bg-base-200 text-base-content">
@@ -61,6 +61,8 @@ const ParticipantPage = () => {
                         <p>{user?.email}</p>
                     </div>
                 </div>
+                <button onClick={()=>logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
+
             </ul>
 
         </div>

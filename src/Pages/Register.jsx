@@ -39,7 +39,7 @@ const Register = () => {
                 'content-type': ' multipart/form-data'
             }
         })
-        console.log(res.data)
+        console.log(res.data.data.display_url)
 
         const passwordRegex =
             /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])[A-Za-z\d@#$%^&+=!.]{6,20}$/;
@@ -54,13 +54,14 @@ const Register = () => {
         if (res.data.success) {
             createUser(email, password)
                 .then(() => {
-                    updateUserProfile(name, photo)
+                    updateUserProfile(name, res.data.data.display_url)
                         .then(() => {
                             // create user entry in the database
                             const userInfo = {
                                 name: name,
                                 email: email,
                                 role: role,
+                                userImg: res.data.data.display_url
                             }
                             axiosPublic.post('/users', userInfo)
                                 .then(res => {
