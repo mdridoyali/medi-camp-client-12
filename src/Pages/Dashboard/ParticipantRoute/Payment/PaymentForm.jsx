@@ -9,7 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
-const PaymentForm = () => {
+// eslint-disable-next-line react/prop-types
+const PaymentForm = ({id}) => {
     const [error, setError] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('')
@@ -18,23 +19,25 @@ const PaymentForm = () => {
     const { user } = useAuth()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure();
+  
 
-
-    const { data: campInfo = [], refetch } = useQuery({
+    const { data: campInfo = {}, refetch } = useQuery({
         queryKey: ['registered-camp', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/registered-camp/${user?.email}`)
+            const res = await axiosSecure.get(`/payment-camp/${id}`)
             return res.data
         }
     })
 
-    const totalPrice = campInfo.reduce((total, item) => total + item.campFees, 0)
-    console.log(totalPrice, campInfo)
+    // const totalPrice = campInfo.reduce((total, item) => total + item.campFees, 0)
+    const totalPrice = campInfo?.campFees
+
+      console.log(campInfo)
     useEffect(() => {
         if (totalPrice > 0) {
             axiosSecure.post('/create-payment-intent', { price: totalPrice })
                 .then(res => {
-                    console.log(res.data.clientSecret)
+                    // console.log(res.data.clientSecret)
                     setClientSecret(res.data.clientSecret)
                 })
         }
@@ -89,17 +92,29 @@ const PaymentForm = () => {
                     name: user?.displayName,
                     totalPrice,
                     transactionId: paymentIntent.id,
-                    date: new Date(), // utc date convert . use moment js to
-                    cartIds: campInfo.map(item => item._id),
-                    // menuItemIds: campInfo.map(item => item.menuId),
-                    status: 'pending',
+                    date: new Date(),
+                    paymentStatus: 'paid',
+                    confirmationStatus: 'pending',
+                    cartIds: campInfo._id,
+                    campName: campInfo.campName,
+                    campFees: campInfo.campFees,
+                    location:campInfo.location,
+                    scheduleDate:campInfo.scheduleDate,
+                    
+
+                    
+                    
+
                 }
                 const res = await axiosSecure.post('/payments', payment)
                 console.log('payment save', res.data)
                 refetch()
+                const updateStatus = await axiosSecure.patch(`/payment/${id}`, {paymentStatus : "paid"})
+                console.log('update Status',updateStatus.data)
+
                 if (res.data?.paymentResult?.insertedId) {
                     toast.success('Payment success')
-                    // navigate('/dashboard/paymentHistory')
+                    navigate('/dashboard/payment-history')
                 }
 
             }
@@ -108,10 +123,10 @@ const PaymentForm = () => {
     }
 
 
-
     return (
-        <div>
+        <div className="md:w-10/12 mx-auto">
             <form onSubmit={handleSubmit}>
+                <h2 className="text-center pb-10 text-xl font-semibold" >To Pay ${totalPrice}</h2>
                 <CardElement
                     options={{
                         style: {
@@ -128,9 +143,10 @@ const PaymentForm = () => {
                         },
                     }}
                 />
-                <button className="btn btn-sm btn-primary my-4" type="submit" >
+                <button className="btn btn-sm btn-primary my-4" type="submit"   disabled={ campInfo.paymentStatus === 'paid'} >
                     Pay
                 </button>
+                { campInfo.paymentStatus === 'paid' &&  <p className="text-red-600">All Ready You Are Paid for This camp</p>}
                 <p className="text-red-600">{error}</p>
                 {transactionId && <p className="text-green-600">Your transaction Id {transactionId}</p>}
             </form>

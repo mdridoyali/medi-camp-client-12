@@ -22,6 +22,7 @@ const RegisteredCamp = () => {
             return res.data
         }
     })
+    console.log(campInfo)
 
 
     const handleDelete = (id) => {
@@ -71,16 +72,14 @@ const RegisteredCamp = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {campInfo.map(camp => <tr key={camp._id}>
+                        {Array.isArray(campInfo) && campInfo.map(camp => <tr key={camp._id}>
                             <td>{camp.campName}</td>
                             <td>{camp.scheduleDate}</td>
                             <td>{camp.location}</td>
                             <td>{camp.campFees}</td>
                             <td>{camp.confirmationStatus}</td>
-                            <td>{camp.paymentStatus === 'unpaid' ? <Link to={'/dashboard/payment'} className="btn btn-sm">pay</Link> : <button className="btn disabled:">Paid</button>}</td>
+                            <td>{camp.paymentStatus === 'paid' ? <Link to={`/dashboard/payment/${camp._id}`} disabled className="btn btn-sm ">Paid</Link> : <Link to={`/dashboard/payment/${camp._id}`} className="btn btn-sm">pay</Link>}</td>
                             <td> <button onClick={() => handleDelete(camp._id)} className="btn text-xl btn-ghost btn-xs"><FaTrash className="text-red-600"></FaTrash></button></td>
-                            {/* <td> <Link to={`/dashboard/update-camp/${user._id}`} className="btn text-xl btn-ghost btn-xs"><FaPen className="text-green-600"></FaPen></Link></td>
-                                <td> <button onClick={() => handleDelete(user._id)} className="btn text-xl btn-ghost btn-xs"><FaTrash className="text-red-600"></FaTrash></button></td> */}
                         </tr>)}
                     </tbody>
                 </table>

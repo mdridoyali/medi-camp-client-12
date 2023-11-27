@@ -90,8 +90,9 @@ const router = createBrowserRouter([
         element: <Feedback />
       },
       {
-        path: 'payment',
-        element: <Payment />
+        path: 'payment/:id',
+        element: <Payment />,
+        loader: ({ params }) => fetch(`${params.id}`)
       },
     ]
   },

@@ -7,16 +7,18 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Loading from "../../../Components/Loading";
+import useAuth from "../../../Hooks/useAuth";
 
 
 const ManageCamp = () => {
     const axiosSecure = useAxiosSecure()
+    const {user} = useAuth()
 
 
     const { data: camps = [], refetch, isLoading } = useQuery({
-        queryKey: ['all-camps'],
+        queryKey: ['all-camps', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get('/all-camps')
+            const res = await axiosSecure.get(`/all-camps/${user?.email}`)
             return res.data
         }
     })

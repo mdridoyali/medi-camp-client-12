@@ -24,7 +24,7 @@ const CampDetails = () => {
         }
     })
 
-    const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id } = camp
+    const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id, organizerEmail } = camp
 
 
     const handleSubmit = async (e) => {
@@ -42,11 +42,9 @@ const CampDetails = () => {
             email: user?.email,
             name: user?.displayName
         }
-      
-
 
         const registeredInfo = {
-             name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant,  campName, campFees, location,scheduleDate, campId: _id  }
+            name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant, campName, campFees, location, scheduleDate, campId: _id, organizerEmail }
         console.log(registeredInfo)
         // campInfo: { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, campId: _id }
         //  save data to the database
@@ -54,7 +52,7 @@ const CampDetails = () => {
             const res = await axiosPublic.post('/registered-camp', registeredInfo);
             console.log(res.data.insertedId);
             if (res.data.insertedId) {
-                console.log(res.data.insertedId);
+                console.log(res.data);
                 toast.success('The Camp is Registered');
                 form.reset();
             }
@@ -95,12 +93,18 @@ const CampDetails = () => {
                 </CardContent>
                 <CardActions>
                     {
-                        userRole?.role === 'participant' &&
-                        <Link to={`/camp-details/${_id}`}>
-                            <Button variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
-                                Join Camp
-                            </Button>
-                        </Link>
+                        userRole?.role === 'participant' ?
+                            <Link to={`/camp-details/${_id}`}>
+                                <Button variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
+                                    Join Camp
+                                </Button>
+                            </Link>
+                            :
+                            <Link to={`/camp-details/${_id}`}>
+                                <Button disabled variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
+                                    Join Camp
+                                </Button>
+                            </Link>
                     }
                 </CardActions>
             </Card>

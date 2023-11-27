@@ -27,7 +27,7 @@ const AvailableCamp = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className="min-h-[60vh]">
+        <div className="min-h-[60vh] mb-10">
             <Helmet><title>MediCamp | Available Camp</title></Helmet>
             <SectionHeading heading={'All Available Camps'} ></SectionHeading>
             <div className="grid md:grid-cols-2 mx-auto  p-3 md:mx-10 gap-5">

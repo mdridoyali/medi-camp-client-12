@@ -17,8 +17,10 @@
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.2.0",
     "@tanstack/react-query": "^5.8.7",
+    "aos": "^2.3.4",
     "axios": "^1.6.2",
     "firebase": "^10.6.0",
+    "framer-motion": "^10.16.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "prop-types": "^15.8.1",
@@ -31,6 +33,7 @@
     "react-loader-spinner": "^5.4.5",
     "react-router-dom": "^6.16.0",
     "react-simple-captcha": "^9.3.0",
+    "react-table": "^7.8.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.10.1"
   },
