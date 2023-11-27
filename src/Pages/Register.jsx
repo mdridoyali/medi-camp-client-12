@@ -62,7 +62,15 @@ const Register = () => {
                                 email: email,
                                 role: role,
                             }
-                          
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        toast.success("Successfully Registered");
+                                        form.reset();
+                                        console.log(res.data);
+                                        navigate(location?.state ? location?.state : "/");
+                                    }
+                                })
                         })
                         .catch((error) => console.log(error));
                 })
