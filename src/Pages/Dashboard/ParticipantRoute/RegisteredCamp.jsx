@@ -77,7 +77,7 @@ const RegisteredCamp = () => {
                             <td>{camp.location}</td>
                             <td>{camp.campFees}</td>
                             <td>{camp.confirmationStatus}</td>
-                            <td>{camp.paymentStatus === 'unpaid' ? <button className="btn btn-sm">pay</button> : <button className="btn disabled:">Paid</button>}</td>
+                            <td>{camp.paymentStatus === 'unpaid' ? <Link to={'/dashboard/payment'} className="btn btn-sm">pay</Link> : <button className="btn disabled:">Paid</button>}</td>
                             <td> <button onClick={() => handleDelete(camp._id)} className="btn text-xl btn-ghost btn-xs"><FaTrash className="text-red-600"></FaTrash></button></td>
                             {/* <td> <Link to={`/dashboard/update-camp/${user._id}`} className="btn text-xl btn-ghost btn-xs"><FaPen className="text-green-600"></FaPen></Link></td>
                                 <td> <button onClick={() => handleDelete(user._id)} className="btn text-xl btn-ghost btn-xs"><FaTrash className="text-red-600"></FaTrash></button></td> */}

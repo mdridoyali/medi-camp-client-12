@@ -46,8 +46,7 @@ const CampDetails = () => {
 
 
         const registeredInfo = {
-             name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant,  campName, campFees, location,scheduleDate
-        }
+             name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant,  campName, campFees, location,scheduleDate, campId: _id  }
         console.log(registeredInfo)
         // campInfo: { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, campId: _id }
         //  save data to the database
