@@ -1,3 +1,5 @@
+const image_hoisting_key = import.meta.env.VITE_IMG_HOISTING_KEY
+const image_hoisting_api = `https://api.imgbb.com/1/upload?key=${image_hoisting_key}`
 import {
     Card,
     Typography,
@@ -19,14 +21,25 @@ const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
-        const photo = form.photo.value;
+        const role = form.role.value;
         const password = form.password.value;
-        // console.log(name, email, photo, password);
+        console.log(name, email, password, role);
+        const inputFile = document.querySelector('input[type="file"]');
+        const photo = inputFile.files[0];
+        const formData = new FormData();
+        formData.append('image', photo);
+
+        const res = await axiosPublic.post(image_hoisting_api, formData, {
+            headers: {
+                'content-type': ' multipart/form-data'
+            }
+        })
+        console.log(res.data)
 
         const passwordRegex =
             /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])[A-Za-z\d@#$%^&+=!.]{6,20}$/;
@@ -37,35 +50,30 @@ const Register = () => {
                 text: "Password must be at least one uppercase, one digit, one special character and be 6 to 20 characters long.",
             });
         }
-        <div className="mt-6"></div>
 
-        createUser(email, password)
-            .then(() => {
-                updateUserProfile(name, photo)
-                    .then(() => {
-                        // create user entry in the database
-                        const userInfo = {
-                            name: name,
-                            email: email,
-                            role: "participant",
-                        }
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    toast.success("Successfully Registered");
-                                    form.reset();
-                                    console.log(res.data);
-                                    navigate(location?.state ? location?.state : "/");
-                                }
-                            })
-                    })
-                    .catch((error) => console.log(error));
-            })
-            .catch((error) => {
-                console.log(error);
-                form.reset();
-                return toast.error("Already have an account", { duration: 3000 });
-            });
+        if (res.data.success) {
+            createUser(email, password)
+                .then(() => {
+                    updateUserProfile(name, photo)
+                        .then(() => {
+                            // create user entry in the database
+                            const userInfo = {
+                                name: name,
+                                email: email,
+                                role: role,
+                            }
+                          
+                        })
+                        .catch((error) => console.log(error));
+                })
+                .catch((error) => {
+                    console.log(error);
+                    form.reset();
+                    return toast.error("Already have an account", { duration: 3000 });
+                });
+        }
+
+
     };
 
     return (
@@ -84,11 +92,26 @@ const Register = () => {
                     >
                         <div className="mb-1 flex flex-col gap-6">
                             <input required name="name" type="text" placeholder="Name" label="Your Name" className="border p-1" />
-                            <input required  name="email" type="email" placeholder="Email" label="Your Email" className="border p-1" />
-                            <input required  name="photo" type="text" placeholder="Photo url" label="Photo URL" className="border p-1" />
+                            <input required name="email" type="email" placeholder="Email" label="Your Email" className="border p-1" />
+                            {/* <input   name="photo" type="text" placeholder="Photo url" label="Photo URL" className="border p-1" /> */}
+                            <input
+                                type="file"
+                                // {...register('image', { required: true })}
+                                className=" input-bordered  border p-1 " />
+                            {/* {errors.image && <span className="text-red-600">Image is required</span>} */}
+                            <select
+                                name="role"
+                                className="border p-1 "
+                                required
+                            >
+                                <option disabled>Role</option>
+                                <option>participant</option>
+                                <option>health professional</option>
+                                <option>organizer</option>
+                            </select>
                             <div className="relative ">
                                 <input
-                                    required 
+                                    required
                                     name="password"
                                     placeholder="Password"
                                     type={show ? "text" : "password"}

@@ -53,33 +53,33 @@ const router = createBrowserRouter([
       // for Organizer 
       {
         path: 'organizer-profile',
-        element: <OrganizerProfile />
+        element: <PrivetRoutes><OrganizerProfile /></PrivetRoutes>
       },
       {
         path: 'add-a-camp',
-        element: <AddCamp />
+        element: <PrivetRoutes><AddCamp /></PrivetRoutes>
       },
       {
         path: 'manage-camps',
-        element: <ManageCamp />
+        element: <PrivetRoutes><ManageCamp /></PrivetRoutes>
       },
       {
         path: 'manage-registered-camps',
-        element: <ManageRegisteredCamp />
+        element: <PrivetRoutes><ManageRegisteredCamp /></PrivetRoutes>
       },
       {
         path: 'update-camp/:id',
-        element: <UpdateCamp />,
+        element: <PrivetRoutes><UpdateCamp /></PrivetRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
       },
       // for Participant
       {
         path: 'participant-profile',
-        element: <ParticipantProfile />
+        element: <PrivetRoutes><ParticipantProfile /></PrivetRoutes>
       },
       {
         path: 'registered-camps',
-        element: <RegisteredCamp />
+        element: <PrivetRoutes><RegisteredCamp /></PrivetRoutes>
       },
       {
         path: 'payment-history',
@@ -87,11 +87,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'feedback',
-        element: <Feedback />
+        element: <PrivetRoutes><Feedback /></PrivetRoutes>
       },
       {
         path: 'payment/:id',
-        element: <Payment />,
+        element: <PrivetRoutes><Payment /></PrivetRoutes>,
         loader: ({ params }) => fetch(`${params.id}`)
       },
     ]
