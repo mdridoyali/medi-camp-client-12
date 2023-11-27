@@ -70,7 +70,7 @@ const OrganizerPage = () => {
                         <p>{user?.email}</p>
                     </div>
                 </div>
-                <button onClick={()=>logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
+                <button onClick={() => logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
 
             </ul>
 

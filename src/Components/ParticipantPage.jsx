@@ -10,7 +10,15 @@ const ParticipantPage = () => {
             <ul className="menu px-4 w-72 min-h-screen space-y-5 bg-base-200 text-base-content">
                 {/* Sidebar content here */}
                 <div className='flex justify-end'> <label htmlFor="my-drawer-2" aria-label="close sidebar" className=" btn btn-sm md:hidden rounded-full bg-base-100 w-11 h-11 text-xl drawer-overlay"><FaMinus /></label></div>
-                <Link to={'/'}><img className='w-14 h-13' src={'https://i.ibb.co/FzwdnpL/Screenshot-1.jpg'} /></Link>
+                <Link to={'/'} className="flex items-center ">
+                    <img
+                        className="w-10 h-10"
+                        src={"https://i.ibb.co/NWnH0Jj/Screenshot-7-removebg-preview.png"}
+                    />
+                    <h1 className="text-transparent text-4xl font-bold bg-clip-text bg-gradient-to-r from-violet-600 to-amber-500">
+                        MediCamp
+                    </h1>
+                </Link>
                 <NavLink
                     to={"/dashboard/participant-profile"}
                     className={({ isActive }) =>

@@ -22,7 +22,7 @@ const HealthProfessionalPage = () => {
                     </h1>
                 </Link>
                 <NavLink
-                    to={"/dashboard/organizer-profile"}
+                    to={"/dashboard/health-professional-profile"}
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"

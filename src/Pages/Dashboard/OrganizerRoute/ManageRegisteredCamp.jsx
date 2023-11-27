@@ -50,9 +50,10 @@ const ManageRegisteredCamp = () => {
         console.log(id)
         const res = await axiosSecure.patch(`/payment/${id}`, { confirmationStatus: "confirmed", paymentStatus: 'paid' })
         if (res.data.modifiedCount > 0) {
-            refetch()
             toast.success('Confirmed Successful')
+            refetch()
         }
+        refetch()
     }
 
 
@@ -87,8 +88,8 @@ const ManageRegisteredCamp = () => {
                                 <td>{item.location}</td>
                                 <td>${item.campFees}</td>
                                 <td>{item.paymentStatus}</td>
-                                <td>{item.confirmationStatus === 'pending' ? <button onClick={() => handleConfirm(item._id)} className="btn btn-sm bg-orange-500 text-white ">{item.confirmationStatus}</button> : <button className="btn btn-sm bg-lime-500  text-white">Confirmed</button>}</td>
-                                <td>{item.paymentStatus === 'paid' ? <button onClick={() => handleDelete(item._id)} className="btn btn-sm bg-lime-500 ">Cancel</button> : <button disabled className="btn btn-sm bg-lime-500 ">Cancel</button>}</td>
+                                <td>{item.confirmationStatus === 'pending' ? <button onClick={() => handleConfirm(item._id)} className="btn btn-sm bg-orange-500 text-white ">{item.confirmationStatus}</button> : <button className=" rounded-md btn-sm cursor-default bg-lime-500  text-white">Confirmed</button>}</td>
+                                <td>{item.paymentStatus === 'paid' ? <button onClick={() => handleDelete(item._id)} className="btn btn-sm bg-orange-500 text-white ">Cancel</button> : <button disabled className="btn btn-sm bg-lime-500 ">Cancel</button>}</td>
                             </tr>
                         ))}
                     </tbody>

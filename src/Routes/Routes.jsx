@@ -19,6 +19,7 @@ import RegisteredCamp from "../Pages/Dashboard/ParticipantRoute/RegisteredCamp";
 import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/PaymentHistory";
 import Feedback from "../Pages/Dashboard/ParticipantRoute/Feedback";
 import Payment from "../Pages/Dashboard/ParticipantRoute/Payment/Payment";
+import HealthProfessional from './../Pages/Dashboard/HealthProfessionalRoute/HealthProfessional';
 
 
 const router = createBrowserRouter([
@@ -96,8 +97,8 @@ const router = createBrowserRouter([
       },
       // for health professional
       {
-        path: 'feedback',
-        element: <PrivetRoutes><Feedback /></PrivetRoutes>
+        path: 'health-professional-profile',
+        element: <PrivetRoutes><HealthProfessional /></PrivetRoutes>
       },
     ]
   },
