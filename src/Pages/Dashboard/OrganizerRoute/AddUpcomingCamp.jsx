@@ -18,14 +18,14 @@ const AddUpcomingCamp = () => {
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
-       
+       console.log(data)
         const res = await axiosPublic.post(image_hoisting_api, imageFile, {
             headers: {
                 'content-type': ' multipart/form-data'
             }
         })
+
         if(res.data.success){
-            // now send the menu item to the database with the image url
             const campItem = {
                 campName: data.campName,
                 campFees: parseInt(data.campFees),
@@ -38,13 +38,13 @@ const AddUpcomingCamp = () => {
                 description: data.description,
                 organizerEmail: user?.email
             }
-           console.log(campItem)
-           const campRes = await axiosSecure.post('/add-a-camp', campItem);
+        //    console.log(campItem)
+
+           const campRes = await axiosPublic.post('/upcoming-camp', campItem);
            console.log(campRes.data)
            if(campRes.data.insertedId){
-             toast.success(`Camp Added Success`)
+             toast.success(`Upcoming Camp Added Success`)
            }
-
         }
 
     }
