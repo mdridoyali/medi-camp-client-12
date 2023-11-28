@@ -21,7 +21,6 @@ const ManageRegisteredCamp = () => {
     })
     console.log(payment)
 
-filter
     const handleDelete = (id) => {
         console.log(id)
         Swal.fire({

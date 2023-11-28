@@ -39,6 +39,7 @@ const Feedback = () => {
             reviewerName: user?.displayName,
             reviewerImg: user?.photoURL,
             paymentStatus: 'paid',
+            reviewTime: new Date()
         }
         console.log(reviewData)
 
