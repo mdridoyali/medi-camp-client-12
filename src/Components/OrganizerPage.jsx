@@ -7,7 +7,7 @@ const OrganizerPage = () => {
     const { user, logOutUser } = useAuth()
     return (
         <div className="drawer-content">
-            <ul className="menu px-4 w-72 min-h-screen space-y-5 bg-base-200 text-base-content">
+            <ul className="menu px-4 w-72 min-h-screen space-y-3 bg-base-200 text-base-content">
                 {/* Sidebar content here */}
                 <div className='flex justify-end'> <label htmlFor="my-drawer-2" aria-label="close sidebar" className=" btn btn-sm md:hidden rounded-full bg-base-100 w-11 h-11 text-xl drawer-overlay"><FaMinus /></label></div>
                 {/* <Link to={'/'}><img className='w-14 h-13' src={'https://i.ibb.co/FzwdnpL/Screenshot-1.jpg'} /></Link> */}
@@ -24,8 +24,8 @@ const OrganizerPage = () => {
                     to={"/dashboard/organizer-profile"}
                     className={({ isActive }) =>
                         isActive
-                            ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            ? "btn bg-lime-600  rounded-full text-white"
+                            : "btn btn-ghost btn-active rounded-full  btn-sm "
                     }
                 >
                     Organizer Profile
@@ -35,7 +35,7 @@ const OrganizerPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Add A Camp
@@ -45,7 +45,7 @@ const OrganizerPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Manage Camps
@@ -55,10 +55,34 @@ const OrganizerPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Manage Register Camps
+                </NavLink>
+
+                <hr />
+
+                <NavLink
+                    to={"/dashboard/add-upcoming-camp"}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn bg-lime-600 rounded-full text-white"
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
+                    }
+                >
+                    Add Upcoming Camp
+                </NavLink>
+
+                <NavLink
+                    to={"/dashboard/manage-upcoming-camps"}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn bg-lime-600 rounded-full text-white"
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
+                    }
+                >
+                    Manage Upcoming Camps
                 </NavLink>
 
                 <hr />

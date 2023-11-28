@@ -1,3 +1,5 @@
+
+
 const image_hoisting_key = import.meta.env.VITE_IMG_HOISTING_KEY
 const image_hoisting_api = `https://api.imgbb.com/1/upload?key=${image_hoisting_key}`
 import { useForm } from "react-hook-form"
@@ -7,8 +9,8 @@ import toast from "react-hot-toast";
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
 import useAuth from "../../../Hooks/useAuth";
-const AddCamp = () => {
-    const { user } = useAuth()
+const AddUpcomingCamp = () => {
+    const {user} = useAuth()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure()
@@ -16,13 +18,13 @@ const AddCamp = () => {
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
-
+       
         const res = await axiosPublic.post(image_hoisting_api, imageFile, {
             headers: {
                 'content-type': ' multipart/form-data'
             }
         })
-        if (res.data.success) {
+        if(res.data.success){
             // now send the menu item to the database with the image url
             const campItem = {
                 campName: data.campName,
@@ -30,18 +32,18 @@ const AddCamp = () => {
                 location: data.location,
                 specializedService: data.specializedService,
                 healthProfessional: data.healthProfessional,
-                audience: data.audience,
+                audience:data.audience,
                 image: res.data.data.display_url,
                 scheduleDate: data.scheduleDate,
                 description: data.description,
                 organizerEmail: user?.email
             }
-            console.log(campItem)
-            const campRes = await axiosSecure.post('/add-a-camp', campItem);
-            console.log(campRes.data)
-            if (campRes.data.insertedId) {
-                toast.success(`Camp Added Success`)
-            }
+           console.log(campItem)
+           const campRes = await axiosSecure.post('/add-a-camp', campItem);
+           console.log(campRes.data)
+           if(campRes.data.insertedId){
+             toast.success(`Camp Added Success`)
+           }
 
         }
 
@@ -50,11 +52,11 @@ const AddCamp = () => {
 
     return (
         <div className="px-2 md:px-5 mb-14 ">
-            <Helmet>
+              <Helmet>
                 <title>MediCamp | Add Camp</title>
             </Helmet>
-            <SectionHeading heading={'Add A Camp'} ></SectionHeading>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
+            <SectionHeading heading={'Add upcoming Camp'} ></SectionHeading>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3   font-bold md:font-normal " >
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
@@ -180,6 +182,8 @@ const AddCamp = () => {
     );
 };
 
-export default AddCamp;
+export default AddUpcomingCamp;
+
+
 
 
