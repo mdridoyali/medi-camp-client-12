@@ -24,7 +24,10 @@ const Feedback = () => {
         }
     })
 
-    const paidRegisteredData = registeredData.filter(item => item.paymentStatus === 'paid') || []
+    const paidRegisteredData = Array.isArray(registeredData)
+        ? registeredData.filter(item => item.paymentStatus === 'paid')
+        : [];
+
 
     const handleReview = async (e, id) => {
         e.preventDefault()
@@ -41,7 +44,7 @@ const Feedback = () => {
 
         const res = await axiosSecure.patch(`/review-update/${id}`, reviewData)
         console.log(res.data)
-        if(res.data.modifiedCount === 1){
+        if (res.data.modifiedCount === 1) {
             toast.success('Thanks For Review')
         }
 
@@ -83,7 +86,7 @@ const Feedback = () => {
                                     </td>
                                 </tr>
 
-                                <dialog  id="my_modal_5" className="modal modal-bottom sm:modal-middle" >
+                                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle" >
                                     <div className="modal-box">
                                         <h3 className="font-bold mb-3 text-lg">Write Your Feedback Here for This Camp!</h3>
 
