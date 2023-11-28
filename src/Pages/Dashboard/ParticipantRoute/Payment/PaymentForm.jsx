@@ -100,16 +100,12 @@ const PaymentForm = ({id}) => {
                     campFees: campInfo.campFees,
                     location:campInfo.location,
                     scheduleDate:campInfo.scheduleDate,
-                    
-
-                    
-                    
-
                 }
+
                 const res = await axiosSecure.post('/payments', payment)
                 console.log('payment save', res.data)
                 refetch()
-                const updateStatus = await axiosSecure.patch(`/payment/${id}`, {paymentStatus : "paid"})
+                const updateStatus = await axiosSecure.patch(`/payment/${id}`, {paymentStatus : "paid",})
                 console.log('update Status',updateStatus.data)
 
                 if (res.data?.paymentResult?.insertedId) {
