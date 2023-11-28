@@ -74,6 +74,7 @@ import 'swiper/css/navigation';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../Hooks/useAuth';
+import SectionHeading from '../../Components/sectionHeading';
 
 
 const Testimonials = () => {
@@ -97,26 +98,29 @@ const Testimonials = () => {
         <>
 
             <Container maxWidth='lg'>
-                <Box sx={{ my: 10 }}>
+                <SectionHeading heading={'Feedback & Rating'} ></SectionHeading>
+                <Box sx={{ mt: 2, mb: 10 }}>
 
                     <Swiper navigation={true} modules={[Navigation, Autoplay]} className="mySwiper">
                         {
                             data?.map(data => <SwiperSlide key={data._id}>
 
 
-                                <div className=' md:flex gap-10  justify-center items-center '>
+                                <div className='flex gap-10  justify-center items-center '>
                                     <div className='text-center'>
-                                        <img src={data.reviewerImg} alt="" className='rounded-full  w-28  ' />
+                                        <img src={data.reviewerImg} alt="" className='rounded-full mx-auto w-28 h-28 ' />
                                         <h1 className='font-bold text-lg'>{data?.name}</h1>
                                     </div>
 
                                     <div className='text-center'>
                                         <p className=' text-2xl font-semibold'>{data?.campName}</p>
-                                        <Rating
-                                            style={{ maxWidth: 120 }}
-                                            value={data?.rating}
-                                            readOnly
-                                        />
+                                        <div className='text-center mx-auto flex justify-center'>
+                                            <Rating
+                                                style={{ maxWidth: 120 }}
+                                                value={data?.rating}
+                                                readOnly
+                                            />
+                                        </div>
                                         <h1 className=''>{data?.reviewDetails}</h1>
                                         <h1 className=''>{data?.reviewTime}</h1>
                                     </div>

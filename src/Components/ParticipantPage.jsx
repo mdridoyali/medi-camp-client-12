@@ -63,7 +63,7 @@ const ParticipantPage = () => {
                 <hr />
                 <Link to={"/"}  className="btn btn-outline rounded-full flex items-center gap-5 justify-center text-xl "><FaHome /> <p >  Home </p></Link>
                 <div className="flex gap-3 items-center text-base font-semibold">
-                    <img src={user?.photoURL} className="rounded-full w-14" />
+                    <img src={user?.photoURL} className="rounded-full w-14 h-14" />
                     <div>
                         <p>{user?.displayName}</p>
                         <p>{user?.email}</p>

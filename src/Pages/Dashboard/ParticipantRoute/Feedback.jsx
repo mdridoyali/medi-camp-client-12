@@ -31,23 +31,24 @@ const Feedback = () => {
 
     const handleReview = async (e, id) => {
         e.preventDefault()
-        const reviewDetails = e.target.reviewDetails.value;
-        console.log(rating, reviewDetails, id);
-        const reviewData = {
-            rating,
-            reviewDetails,
-            reviewerName: user?.displayName,
-            reviewerImg: user?.photoURL,
-            paymentStatus: 'paid',
-            reviewTime: new Date()
-        }
-        console.log(reviewData)
+        console.log(id, rating)
+        // const reviewDetails = e.target.reviewDetails.value;
+        // console.log(rating, reviewDetails, id);
+        // const reviewData = {
+        //     rating,
+        //     reviewDetails,
+        //     reviewerName: user?.displayName,
+        //     reviewerImg: user?.photoURL,
+        //     paymentStatus: 'paid',
+        //     reviewTime: new Date()
+        // }
+        // console.log(reviewData)
 
-        const res = await axiosSecure.patch(`/review-update/${id}`, reviewData)
-        console.log(res.data)
-        if (res.data.modifiedCount === 1) {
-            toast.success('Thanks For Review')
-        }
+        // const res = await axiosSecure.patch(`/review-update/${id}`, reviewData)
+        // console.log(res.data)
+        // if (res.data.modifiedCount === 1) {
+        //     toast.success('Thanks For Review')
+        // }
 
     }
 

@@ -15,7 +15,7 @@ const OrganizerProfile = () => {
             <div className="grid mt-5 lg:grid-cols-3  mx-auto text-center">
                 <div>c</div>
                 <div className="mx-auto-  text-center">
-                    <img className="mx-auto rounded-full" src={user?.photoURL} />
+                    <img className="mx-auto rounded-full w-28 h-28 " src={user?.photoURL} />
                     <p className="p-3" ></p>
                     <h2 className="text-xl font-semibold">{user?.displayName}</h2>
                     <p>Email: {user?.email}</p>

@@ -122,7 +122,7 @@ const MainLayout = ({ children }) => {
                 >
                   {user && (
                     <li className="mx-auto">
-                      <img className="w-28  rounded-full" src={user.photoURL} />
+                      <img className="w-28 h-28  rounded-full" src={user.photoURL} />
                     </li>
                   )}
                   {user && (

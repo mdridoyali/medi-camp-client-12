@@ -100,7 +100,7 @@ const Login = () => {
               Login
             </button>
 
-            <SocialLogin></SocialLogin>
+            {/* <SocialLogin></SocialLogin> */}
             <p color="gray" className="mt-4 text-center font-normal">
               New Here?{" "}
               <Link

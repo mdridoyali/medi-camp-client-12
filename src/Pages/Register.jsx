@@ -139,7 +139,7 @@ const Register = () => {
                             Register
                         </button>
 
-                        <SocialLogin></SocialLogin>{" "}
+                        {/* <SocialLogin></SocialLogin>{" "} */}
                         <Typography color="gray" className="mt-4 text-center font-normal">
                             Already have an account?{" "}
                             <Link to={"/login"} href="#" className="font-bold text-gray-900">
