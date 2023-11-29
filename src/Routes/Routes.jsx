@@ -23,6 +23,7 @@ import HealthProfessional from './../Pages/Dashboard/HealthProfessionalRoute/Hea
 import AddUpcomingCamp from "../Pages/Dashboard/OrganizerRoute/AddUpcomingCamp";
 import ManageUpcomingCamps from "../Pages/Dashboard/OrganizerRoute/ManageUpcomingCamps";
 import UpcomingCampDetails from "../Pages/Home/UpcomingCampDetails";
+import AcceptedCamps from "../Pages/Dashboard/HealthProfessionalRoute/AcceptedCamps";
 
 
 const router = createBrowserRouter([
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: 'health-professional-profile',
         element: <PrivetRoutes><HealthProfessional /></PrivetRoutes>
+      },
+      {
+        path: 'accepted-camps',
+        element: <PrivetRoutes><AcceptedCamps /></PrivetRoutes>
       },
     ]
   },

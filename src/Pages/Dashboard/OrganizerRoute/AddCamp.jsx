@@ -7,16 +7,17 @@ import toast from "react-hot-toast";
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
 import useAuth from "../../../Hooks/useAuth";
+
+
 const AddCamp = () => {
     const { user } = useAuth()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure()
 
-
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
-
+        const toastId = toast.loading('Adding Camp ...')
         const res = await axiosPublic.post(image_hoisting_api, imageFile, {
             headers: {
                 'content-type': ' multipart/form-data'
@@ -40,7 +41,7 @@ const AddCamp = () => {
             const campRes = await axiosSecure.post('/add-a-camp', campItem);
             console.log(campRes.data)
             if (campRes.data.insertedId) {
-                toast.success(`Camp Added Success`)
+                toast.success('Camp Added Success', { id: toastId })
             }
 
         }

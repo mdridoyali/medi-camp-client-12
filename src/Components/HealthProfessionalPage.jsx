@@ -26,10 +26,20 @@ const HealthProfessionalPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full btn-sm"
                     }
                 >
                     Professional Profile
+                </NavLink>
+                <NavLink
+                    to={"/dashboard/accepted-camps"}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn bg-lime-600 rounded-full text-white"
+                            : "btn btn-ghost  btn-active rounded-full btn-sm "
+                    }
+                >
+                    Accepted Camps
                 </NavLink>
 
                 <hr />

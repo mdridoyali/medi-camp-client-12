@@ -18,6 +18,7 @@ const AddUpcomingCamp = () => {
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
+        const toastId = toast.loading('Adding Upcoming Camp ...')
        console.log(data)
         const res = await axiosPublic.post(image_hoisting_api, imageFile, {
             headers: {
@@ -43,7 +44,7 @@ const AddUpcomingCamp = () => {
            const campRes = await axiosSecure.post('/upcoming-camp', campItem);
            console.log(campRes.data)
            if(campRes.data.insertedId){
-             toast.success(`Upcoming Camp Added Success`)
+             toast.success(`Upcoming Camp Added Success`, { id: toastId })
              reset()
            }
         }

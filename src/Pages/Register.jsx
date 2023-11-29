@@ -13,15 +13,18 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import SocialLogin from "../Components/SocialLogin";
 import Swal from "sweetalert2";
+import { ThreeDots } from "react-loader-spinner";
 
 const Register = () => {
     const axiosPublic = useAxiosPublic()
     const { createUser, updateUserProfile } = useAuth();
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleRegister = async (e) => {
+        setLoading(true)
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -70,6 +73,7 @@ const Register = () => {
                                         form.reset();
                                         console.log(res.data);
                                         navigate(location?.state ? location?.state : "/");
+                                        setLoading(false)
                                     }
                                 })
                         })
@@ -81,7 +85,6 @@ const Register = () => {
                     return toast.error("Already have an account", { duration: 3000 });
                 });
         }
-
 
     };
 
@@ -136,7 +139,19 @@ const Register = () => {
                             </div>
                         </div>
                         <button type="submit" className="mt-6 w-full text-white p-1 bg-blue-700">
-                            Register
+                            {!loading ? 'Register' :
+                                <div className="flex justify-center">
+                                    <ThreeDots
+                                        height="30"
+                                        width="80"
+                                        // radius="9"
+                                        color="#FEEA00"
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true}
+                                    />
+                                </div>}
                         </button>
 
                         {/* <SocialLogin></SocialLogin>{" "} */}
