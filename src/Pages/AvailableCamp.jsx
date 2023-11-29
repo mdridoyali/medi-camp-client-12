@@ -6,19 +6,19 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Loading from "../Components/Loading";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AvailableCamp = () => {
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
 
-    const { data: camps = [], refetch, isLoading } = useQuery({
+    const { data: camps = [], isLoading } = useQuery({
         queryKey: ['all-camps-available'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/all-camps')
+            const res = await axiosSecure.get('/all-camps')
             return res.data
         }
     })

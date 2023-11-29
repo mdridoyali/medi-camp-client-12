@@ -9,8 +9,9 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+
 import auth from "../../firebase.config";
+import useAxiosPublic from './../hooks/useAxiosPublic';
 
 
 export const AuthContext = createContext(null);
@@ -21,9 +22,7 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider;
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-   console.log( user)
-
+  
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -56,21 +55,20 @@ const AuthProvider = ({ children }) => {
       // console.log(currentUser);
       setUser(currentUser);
 
-      // console.log(userInfo)
-      // if (currentUser) {
-      //   const userInfo = { email: currentUser?.email }
-      //   axiosPublic.post('/jwt', userInfo)
-      //     .then(res => {
-      //       if (res.data.token) {
-      //         localStorage.setItem('access-token', res.data.token)
-      //          setLoader(false);
-      //       }
-      //     })
-      // }
-      // else {
-      //   localStorage.removeItem('access-token')
+      if (currentUser) {
+        const userInfo = { email: currentUser?.email }
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            if (res.data.token) {
+              localStorage.setItem('access-token', res.data.token)
+               setLoading(false);
+            }
+          })
+      }
+      else {
+        localStorage.removeItem('access-token')
         setLoading(false);
-      // }
+      }
 
 
     });

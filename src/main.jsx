@@ -23,7 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <AuthProvider>
           <Toaster />
-          <RouterProvider router={router} />
+          <div className='max-w-7xl mx-auto'>
+            <RouterProvider router={router} />
+          </div>
         </AuthProvider>
       </ThemeProvider>
     </HelmetProvider>

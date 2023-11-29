@@ -27,7 +27,7 @@ const Feedback = () => {
     const paidRegisteredData = Array.isArray(registeredData)
         ? registeredData.filter(item => item.paymentStatus === 'paid')
         : [];
-    console.log(registeredData)
+    console.log(paidRegisteredData)
 
     const handleReview = async (e,) => {
         e.preventDefault()
@@ -78,7 +78,7 @@ const Feedback = () => {
                                     <td>{item.campName}</td>
                                     <td>{item.scheduleDate}</td>
                                     <td>{item.location}</td>
-                                    <td>${item.totalPrice}</td>
+                                    <td>${item.campFees}</td>
                                     <td>{item.paymentStatus}</td>
                                     <td>{item.confirmationStatus}</td>
                                     <td>

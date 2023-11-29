@@ -105,7 +105,7 @@ const PaymentForm = ({id}) => {
                 const res = await axiosSecure.post('/payments', payment)
                 console.log('payment save', res.data)
                 refetch()
-                const updateStatus = await axiosSecure.patch(`/payment/${id}`, {paymentStatus : "paid",})
+                const updateStatus = await axiosSecure.patch(`/payment/${id}`, {paymentStatus : "paid", confirmationStatus:"pending"})
                 console.log('update Status',updateStatus.data)
 
                 if (res.data?.paymentResult?.insertedId) {

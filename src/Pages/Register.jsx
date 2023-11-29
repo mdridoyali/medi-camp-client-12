@@ -103,15 +103,16 @@ const Register = () => {
     };
 
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.querySelector("input").value;
-        console.log(user_captcha_value);
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
             setDisabled(false);
-        } else {
-            setDisabled(true);
         }
-    };
+        else {
+            setDisabled(true)
+        }
+    }
+
 
 
     return (

@@ -52,6 +52,11 @@ const ManageRegisteredCamp = () => {
             toast.success('Confirmed Successful')
             refetch()
         }
+        const historyRes = await axiosSecure.patch(`/payment/${id}`, { confirmationStatus: "confirmed", paymentStatus: 'paid' })
+        if (historyRes.data.modifiedCount > 0) {
+            toast.success('Confirmed Successful')
+            refetch()
+        }
         refetch()
     }
 
