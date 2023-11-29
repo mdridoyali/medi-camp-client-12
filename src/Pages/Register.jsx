@@ -18,7 +18,7 @@ import {
     loadCaptchaEnginge,
     LoadCanvasTemplate,
     validateCaptcha,
-  } from "react-simple-captcha";
+} from "react-simple-captcha";
 
 
 
@@ -29,7 +29,6 @@ const Register = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const location = useLocation();
-    const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
 
 
@@ -102,7 +101,6 @@ const Register = () => {
         }
     };
 
-
     const handleValidateCaptcha = (e) => {
         const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
@@ -155,7 +153,7 @@ const Register = () => {
                                     placeholder="Password"
                                     type={show ? "text" : "password"}
                                     label="Password"
-                                    className="border w-full p-1 "
+                                    className="border w-full p-1  "
                                 />
                                 <span
                                     onClick={() => setShow(!show)}
@@ -164,7 +162,12 @@ const Register = () => {
                                     {show ? <p>Hide</p> : <p>Show</p>}
                                 </span>
                             </div>
-                            <LoadCanvasTemplate />
+                            <div className="form-control">
+                                    <LoadCanvasTemplate />
+                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above"  className="border w-full p-1 " />
+
+                            </div>
+                            {/* <LoadCanvasTemplate />
                             <div className="relative flex w-full max-w-[24rem]">
                                 <input
                                     ref={captchaRef}
@@ -182,9 +185,13 @@ const Register = () => {
                                 >
                                     Invite
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
-                        <button  type="submit" className="mt-6 w-full text-white p-1 bg-blue-700">
+                        <button
+                            disabled={disabled}
+                            type="submit"
+                            className={disabled ? 'mt-6 w-full text-white p-1 bg-gray-400' : 'mt-6 w-full text-white p-1 bg-blue-700'}
+                        >
                             {!loading ? 'Register' :
                                 <div className="flex justify-center">
                                     <ThreeDots
