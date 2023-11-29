@@ -31,7 +31,7 @@ const AddUpcomingCamp = () => {
                 campFees: parseInt(data.campFees),
                 location: data.location,
                 specializedService: data.specializedService,
-                healthProfessional: data.healthProfessional,
+                // healthProfessional: data.healthProfessional,
                 audience:data.audience,
                 image: res.data.data.display_url,
                 scheduleDate: data.scheduleDate,
@@ -40,10 +40,11 @@ const AddUpcomingCamp = () => {
             }
         //    console.log(campItem)
 
-           const campRes = await axiosPublic.post('/upcoming-camp', campItem);
+           const campRes = await axiosSecure.post('/upcoming-camp', campItem);
            console.log(campRes.data)
            if(campRes.data.insertedId){
              toast.success(`Upcoming Camp Added Success`)
+             reset()
            }
         }
 
@@ -111,7 +112,7 @@ const AddUpcomingCamp = () => {
 
                 {/* row 3 */}
                 <div className="flex flex-col md:flex-row w-full gap-5">
-                    <div className="form-control flex-1">
+                    {/* <div className="form-control flex-1">
                         <label className="label">
                             <span className="label-text">Healthcare Professionals</span>
                         </label>
@@ -121,7 +122,7 @@ const AddUpcomingCamp = () => {
                             placeholder="Healthcare Professionals"
                             className="input input-bordered" />
                         {errors.healthProfessional && <span className="text-red-600">Healthcare is required</span>}
-                    </div>
+                    </div> */}
                     <div className="form-control flex-1">
                         <label className="label">
                             <span className="label-text">Targeted Audience</span>

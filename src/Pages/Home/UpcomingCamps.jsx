@@ -44,7 +44,7 @@ const UpcomingCamps = () => {
 
                             </CardContent>
                             <CardActions>
-                                <Link to={`/camp-details/${item._id}`}>
+                                <Link to={`/upcoming-camp-details/${item._id}`}>
                                     <Button variant="contained" color="primary" >
                                         See Details
                                     </Button>

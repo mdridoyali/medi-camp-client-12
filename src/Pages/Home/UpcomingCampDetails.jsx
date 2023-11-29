@@ -1,30 +1,33 @@
+
+
+
 import { Helmet } from "react-helmet-async";
-import SectionHeading from "../Components/sectionHeading";
-import useAxiosPublic from "../hooks/useAxiosPublic";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
-import Loading from "../Components/Loading";
-import useUser from "../Hooks/useUser";
 import toast from "react-hot-toast";
-import useAuth from "../Hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useUser from "../../Hooks/useUser";
+import useAuth from "../../Hooks/useAuth";
+import SectionHeading from "../../Components/sectionHeading";
+import Loading from "../../Components/Loading";
 
-const CampDetails = () => {
+const UpcomingCampDetails = () => {
     const { id } = useParams()
     const axiosPublic = useAxiosPublic();
     const [userRole] = useUser()
     const { user } = useAuth()
-
+    console.log(id)
 
     const { data: camp = {}, isLoading } = useQuery({
-        queryKey: ['camp-details', id],
+        queryKey: ['upcoming-camp', id],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/camp/${id}`)
+            const res = await axiosPublic.get(`/upcoming-camp/${id}`)
             return res.data
         }
     })
 
-    const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id, organizerEmail } = camp
+    const { campName, campFees, location, specializedService, audience, image, scheduleDate, description, _id, organizerEmail } = camp
 
 
     const handleSubmit = async (e) => {
@@ -36,20 +39,17 @@ const CampDetails = () => {
         const gender = e.target.gender.value;
         const address = e.target.address.value;
         const healthInfo = e.target.healthInfo.value;
-        const paymentStatus = 'unpaid';
-        const confirmationStatus = 'pending';
         const participant = {
             email: user?.email,
             name: user?.displayName
         }
 
         const registeredInfo = {
-            name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant, campName, campFees, location, scheduleDate, campId: _id, organizerEmail }
+            name, age, gender, phoneNumber, address, healthInfo,  participant, campName, campFees, location, scheduleDate, campId: _id, organizerEmail
+        }
         console.log(registeredInfo)
-        // campInfo: { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, campId: _id }
-        //  save data to the database
         try {
-            const res = await axiosPublic.post('/registered-camp', registeredInfo);
+            const res = await axiosPublic.post('/registered-upcoming-camp', registeredInfo);
             console.log(res.data.insertedId);
             if (res.data.insertedId) {
                 console.log(res.data);
@@ -64,14 +64,12 @@ const CampDetails = () => {
 
 
 
-
-
     if (isLoading) return <Loading />
 
     return (
         <div className="w-11/12 mb-16 md:w-9/12 mx-auto">
             <Helmet><title>MediCamp | CampDetails</title></Helmet>
-            <SectionHeading heading={'Camp Details'} ></SectionHeading>
+            <SectionHeading heading={'Upcoming Camp Details'} ></SectionHeading>
 
             <Card sx={{}}>
                 <CardMedia
@@ -82,7 +80,7 @@ const CampDetails = () => {
                 <CardContent>
                     <Typography gutterBottom variant="h5" sx={{ textTransform: "uppercase" }} >{campName} </Typography>
                     <Typography variant="body1"  >Audience: {audience} </Typography>
-                    <Typography variant="body1"  >Health Professional: {healthProfessional} </Typography>
+                    {/* <Typography variant="body1"  >Health Professional: {healthProfessional} </Typography> */}
                     <Typography variant="body1"  >Specialized Service: {specializedService} </Typography>
                     <Typography variant="body1"  >Location: {location} </Typography>
                     <Typography variant="body1"  >Schedule Date: {scheduleDate} </Typography>
@@ -93,18 +91,20 @@ const CampDetails = () => {
                 </CardContent>
                 <CardActions>
                     {
-                        userRole?.role === 'participant' ?
-                            <Link to={`/camp-details/${_id}`}>
-                                <Button variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
-                                    Join Camp
-                                </Button>
-                            </Link>
-                            :
-                            <Link >
-                                <Button disabled variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
-                                    Join Camp
-                                </Button>
-                            </Link>
+                        userRole?.role === 'participant' &&
+                        <Link >
+                            <Button variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
+                                Join Upcoming Camp
+                            </Button>
+                         </Link>
+                    }
+                    {
+                        userRole?.role === 'health professional' &&
+                        <Link >
+                            <Button variant="contained" color="primary" onClick={() => document.getElementById('my_modal_5').showModal()} >
+                                Interest
+                            </Button>
+                        </Link>
                     }
                 </CardActions>
             </Card>
@@ -164,7 +164,7 @@ const CampDetails = () => {
                         </div>
                         <textarea
                             name="healthInfo"
-                            placeholder="Write Here Your Health Related Information"
+                            placeholder="Write Here Specific Health Related Information"
                             className="border px-1 py-2 rounded w-full"
                         ></textarea>
 
@@ -195,4 +195,6 @@ const CampDetails = () => {
     );
 };
 
-export default CampDetails;
+export default UpcomingCampDetails;
+
+

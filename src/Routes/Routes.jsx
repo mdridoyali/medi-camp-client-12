@@ -22,6 +22,7 @@ import Payment from "../Pages/Dashboard/ParticipantRoute/Payment/Payment";
 import HealthProfessional from './../Pages/Dashboard/HealthProfessionalRoute/HealthProfessional';
 import AddUpcomingCamp from "../Pages/Dashboard/OrganizerRoute/AddUpcomingCamp";
 import ManageUpcomingCamps from "../Pages/Dashboard/OrganizerRoute/ManageUpcomingCamps";
+import UpcomingCampDetails from "../Pages/Home/UpcomingCampDetails";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: 'camp-details/:id',
         element: <PrivetRoutes> <CampDetails /></PrivetRoutes>
+      },
+      {
+        path: 'upcoming-camp-details/:id',
+        element: <PrivetRoutes> <UpcomingCampDetails /></PrivetRoutes>
       },
       {
         path: 'contact-us',
@@ -81,7 +86,7 @@ const router = createBrowserRouter([
       {
         path: 'update-camp/:id',
         element: <PrivetRoutes><UpdateCamp /></PrivetRoutes>,
-        loader: ({ params }) => fetch(`https://medi-camp-server.vercel.app/camp/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
       },
 
 
