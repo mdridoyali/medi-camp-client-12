@@ -4,7 +4,7 @@ import useAuth from "../Hooks/useAuth";
 
 
 const ParticipantPage = () => {
-    const {user, logOutUser} = useAuth()
+    const { user, logOutUser } = useAuth()
     return (
         <div className="drawer-content">
             <ul className="menu px-4 w-72 min-h-screen space-y-5 bg-base-200 text-base-content">
@@ -24,7 +24,7 @@ const ParticipantPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full  btn-sm "
                     }
                 >
                     Participant Profile
@@ -34,7 +34,7 @@ const ParticipantPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Registered Camps
@@ -44,7 +44,7 @@ const ParticipantPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Payment History
@@ -54,14 +54,14 @@ const ParticipantPage = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "btn bg-lime-600 rounded-full text-white"
-                            : "btn btn-ghost  btn-active rounded-full "
+                            : "btn btn-ghost  btn-active rounded-full   btn-sm "
                     }
                 >
                     Feedback and Rating
                 </NavLink>
 
                 <hr />
-                <Link to={"/"}  className="btn btn-outline rounded-full flex items-center gap-5 justify-center text-xl "><FaHome /> <p >  Home </p></Link>
+                <Link to={"/"} className="btn btn-outline rounded-full flex items-center gap-5 justify-center text-xl "><FaHome /> <p >  Home </p></Link>
                 <div className="flex gap-3 items-center text-base font-semibold">
                     <img src={user?.photoURL} className="rounded-full w-14 h-14" />
                     <div>
@@ -69,7 +69,7 @@ const ParticipantPage = () => {
                         <p>{user?.email}</p>
                     </div>
                 </div>
-                <button onClick={()=>logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
+                <button onClick={() => logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
 
             </ul>
 

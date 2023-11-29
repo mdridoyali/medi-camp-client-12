@@ -52,14 +52,13 @@ const ManageRegisteredCamp = () => {
             toast.success('Confirmed Successful')
             refetch()
         }
-        const historyRes = await axiosSecure.patch(`/payment/${id}`, { confirmationStatus: "confirmed", paymentStatus: 'paid' })
+        const historyRes = await axiosSecure.patch(`/payment-history/${id}`, { confirmationStatus: "confirmed" })
         if (historyRes.data.modifiedCount > 0) {
             toast.success('Confirmed Successful')
             refetch()
         }
         refetch()
     }
-
 
 
     return (
@@ -92,7 +91,15 @@ const ManageRegisteredCamp = () => {
                                 <td>{item.location}</td>
                                 <td>${item.campFees}</td>
                                 <td>{item.paymentStatus}</td>
-                                <td>{item.confirmationStatus === 'pending' ? <button onClick={() => handleConfirm(item._id)} className="btn btn-sm bg-orange-500 text-white ">{item.confirmationStatus}</button> : <button className=" rounded-md btn-sm cursor-default bg-lime-500  text-white">Confirmed</button>}</td>
+                                <td>{item.paymentStatus === 'unpaid' ?
+                                    <button disabled className={"btn btn-sm  text-white "}>{item.confirmationStatus}</button>
+                                    :
+                                    <>
+                                        <button onClick={() => handleConfirm(item._id)} className={item.confirmationStatus !== 'confirmed' ? " rounded-md btn-sm text-base font-semibold bg-orange-500 text-white" : "hidden"}>{item.confirmationStatus}</button>
+                                        <button className={item.confirmationStatus === 'confirmed' ? " cursor-default rounded-md btn-sm text-base font-semibold bg-lime-500 text-white" : "hidden"}>{item.confirmationStatus}</button>
+                                    </>
+                                }</td>
+
                                 <td>{item.paymentStatus === 'paid' ? <button onClick={() => handleDelete(item._id)} className="btn btn-sm bg-orange-500 text-white ">Cancel</button> : <button disabled className="btn btn-sm bg-lime-500 ">Cancel</button>}</td>
                             </tr>
                         ))}

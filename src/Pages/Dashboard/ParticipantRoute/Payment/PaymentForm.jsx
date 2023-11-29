@@ -46,7 +46,8 @@ const PaymentForm = ({id}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        const toastId = toast.loading('Adding Camp ...')
+         
         if (!stripe || !elements) {
             return
         }
@@ -109,7 +110,7 @@ const PaymentForm = ({id}) => {
                 console.log('update Status',updateStatus.data)
 
                 if (res.data?.paymentResult?.insertedId) {
-                    toast.success('Payment success')
+                    toast.success('Payment success',  { id: toastId })
                     navigate('/dashboard/payment-history')
                 }
 

@@ -16,7 +16,7 @@ import PrivetRoutes from "./PrivetRoutes";
 import CampDetails from "../Pages/CampDetails";
 import ParticipantProfile from "../Pages/Dashboard/ParticipantRoute/ParticipantProfile";
 import RegisteredCamp from "../Pages/Dashboard/ParticipantRoute/RegisteredCamp";
-import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/PaymentHistory";
+// import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/PaymentHistory";
 import Feedback from "../Pages/Dashboard/ParticipantRoute/Feedback";
 import Payment from "../Pages/Dashboard/ParticipantRoute/Payment/Payment";
 import HealthProfessional from './../Pages/Dashboard/HealthProfessionalRoute/HealthProfessional';
@@ -24,6 +24,7 @@ import AddUpcomingCamp from "../Pages/Dashboard/OrganizerRoute/AddUpcomingCamp";
 import ManageUpcomingCamps from "../Pages/Dashboard/OrganizerRoute/ManageUpcomingCamps";
 import UpcomingCampDetails from "../Pages/Home/UpcomingCampDetails";
 import AcceptedCamps from "../Pages/Dashboard/HealthProfessionalRoute/AcceptedCamps";
+import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/Payment/PaymentHistory";
 
 
 const router = createBrowserRouter([
