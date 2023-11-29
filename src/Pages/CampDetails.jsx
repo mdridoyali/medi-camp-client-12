@@ -24,7 +24,7 @@ const CampDetails = () => {
         }
     })
 
-    const { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, _id, organizerEmail } = camp
+    const { campName, campFees, location, specializedService, healthProfessional, count , audience, image, scheduleDate, description, _id, organizerEmail } = camp
 
 
     const handleSubmit = async (e) => {
@@ -46,8 +46,6 @@ const CampDetails = () => {
         const registeredInfo = {
             name, age, gender, phoneNumber, address, healthInfo, paymentStatus, confirmationStatus, participant, campName, campFees, location, scheduleDate, campId: _id, organizerEmail }
         console.log(registeredInfo)
-        // campInfo: { campName, campFees, location, specializedService, healthProfessional, audience, image, scheduleDate, description, campId: _id }
-        //  save data to the database
         try {
             const res = await axiosPublic.post('/registered-camp', registeredInfo);
             console.log(res.data.insertedId);
@@ -60,11 +58,10 @@ const CampDetails = () => {
             console.error('Error submitting form:', error);
             // Handle error, show toast.error, etc.
         }
+        const countRes = await axiosPublic.patch(`/camp-count/${_id}`,{count:1 },);
+        console.log(countRes)
+
     };
-
-
-
-
 
     if (isLoading) return <Loading />
 

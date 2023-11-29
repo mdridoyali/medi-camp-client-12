@@ -12,10 +12,10 @@ const Feedback = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [rating, setRating] = useState(null)
+    const [campName, setCampName] = useState(null)
     const ratingChanged = (newRating) => {
         setRating(newRating)
     };
-
     const { data: registeredData = [] } = useQuery({
         queryKey: ['registered-camp', user?.email],
         queryFn: async () => {
@@ -27,28 +27,28 @@ const Feedback = () => {
     const paidRegisteredData = Array.isArray(registeredData)
         ? registeredData.filter(item => item.paymentStatus === 'paid')
         : [];
+    console.log(registeredData)
 
-
-    const handleReview = async (e, id) => {
+    const handleReview = async (e,) => {
         e.preventDefault()
-        console.log(id, rating)
-        // const reviewDetails = e.target.reviewDetails.value;
-        // console.log(rating, reviewDetails, id);
-        // const reviewData = {
-        //     rating,
-        //     reviewDetails,
-        //     reviewerName: user?.displayName,
-        //     reviewerImg: user?.photoURL,
-        //     paymentStatus: 'paid',
-        //     reviewTime: new Date()
-        // }
-        // console.log(reviewData)
+        const reviewDetails = e.target.reviewDetails.value;
+        console.log(rating, reviewDetails);
+        const reviewData = {
+            campName,
+            rating,
+            reviewDetails,
+            reviewerName: user?.displayName,
+            reviewerImg: user?.photoURL,
+            paymentStatus: 'paid',
+            reviewTime: new Date()
+        }
+        console.log(reviewData)
 
-        // const res = await axiosSecure.patch(`/review-update/${id}`, reviewData)
-        // console.log(res.data)
-        // if (res.data.modifiedCount === 1) {
-        //     toast.success('Thanks For Review')
-        // }
+        const res = await axiosSecure.post('/feedback', reviewData)
+        console.log(res.data)
+        if (res.data.modifiedCount === 1) {
+            toast.success('Thanks For Review')
+        }
 
     }
 
@@ -82,7 +82,7 @@ const Feedback = () => {
                                     <td>{item.paymentStatus}</td>
                                     <td>{item.confirmationStatus}</td>
                                     <td>
-                                        <button className="btn btn-sm bg-lime-600 text-white" onClick={() => document.getElementById('my_modal_5').showModal()} >
+                                        <button className="btn btn-sm bg-lime-600 text-white" onClick={() => { setCampName(item.campName), document.getElementById('my_modal_5').showModal() }} >
                                             Review
                                         </button>
                                     </td>

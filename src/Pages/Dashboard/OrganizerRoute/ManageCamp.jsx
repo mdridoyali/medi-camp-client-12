@@ -49,11 +49,11 @@ const ManageCamp = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className="md:px-3  mb-14">
+        <div className="md:px-3 mb-14">
             <Helmet>
                 <title>MediCamp | Manage Camp</title>
             </Helmet>
-            <SectionHeading heading={'Manage camps'} ></SectionHeading>
+            <SectionHeading heading={'Manage camps'}></SectionHeading>
             <h2 className="text-center font-semibold text-xl mb-5">TOTAL CAMPS {camps.length}</h2>
 
             <div className="overflow-x-auto">
@@ -61,26 +61,33 @@ const ManageCamp = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>SERIAL</th>
+                            <th className="hidden md:table-cell">SERIAL</th>
                             <th>CAMP NAME</th>
-                            <th>SCHEDULE DATE</th>
-                            <th>VENUE LOCATION</th>
+                            <th className="">SCHEDULE DATE</th>
+                            <th className="hidden md:table-cell">VENUE LOCATION</th>
                             <th>UPDATE</th>
                             <th>DELETE</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            camps.map((user, idx) => <tr key={idx}>
-                                <th>{idx + 1}</th>
+                        {camps.map((user, idx) => (
+                            <tr key={idx}>
+                                <td className="hidden md:table-cell">{idx + 1}</td>
                                 <td>{user.campName}</td>
-                                <td>{user.scheduleDate}</td>
-                                <td>{user.location}</td>
-                                <td> <Link to={`/dashboard/update-camp/${user._id}`} className="btn text-xl btn-ghost btn-xs"><FaPen className="text-green-600"></FaPen></Link></td>
-                                <td> <button onClick={() => handleDelete(user._id)} className="btn text-xl btn-ghost btn-xs"><FaTrash className="text-red-600"></FaTrash></button></td>
-                            </tr>)
-                        }
-
+                                <td className="">{user.scheduleDate}</td>
+                                <td className="hidden md:table-cell">{user.location}</td>
+                                <td>
+                                    <Link to={`/dashboard/update-camp/${user._id}`} className="btn text-xl btn-ghost btn-xs">
+                                        <FaPen className="text-green-600"></FaPen>
+                                    </Link>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleDelete(user._id)} className="btn text-xl btn-ghost btn-xs">
+                                        <FaTrash className="text-red-600"></FaTrash>
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

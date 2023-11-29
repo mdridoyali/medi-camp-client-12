@@ -15,9 +15,9 @@ const PopularCamp = () => {
 
 
     const { data: camps = [], isLoading } = useQuery({
-        queryKey: ['all-camps-available'],
+        queryKey: ['six-camps'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/all-camps')
+            const res = await axiosPublic.get('/six-camps')
             return res.data
         }
     })
@@ -42,6 +42,7 @@ const PopularCamp = () => {
                                 <Typography variant="body1"  >Location: {item.location} </Typography>
                                 <Typography variant="body1"  >Schedule Date: {item.scheduleDate} </Typography>
                                 <Typography variant="body1"  >Camp Fees: ${item.campFees} </Typography>
+                                <Typography variant="body1"   >Registered Count: {item.count} </Typography>
 
                             </CardContent>
                             <CardActions>

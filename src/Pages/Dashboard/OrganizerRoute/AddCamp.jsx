@@ -35,7 +35,8 @@ const AddCamp = () => {
                 image: res.data.data.display_url,
                 scheduleDate: data.scheduleDate,
                 description: data.description,
-                organizerEmail: user?.email
+                organizerEmail: user?.email,
+                count: 0
             }
             console.log(campItem)
             const campRes = await axiosSecure.post('/add-a-camp', campItem);

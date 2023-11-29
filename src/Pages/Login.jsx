@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import SocialLogin from "../Components/SocialLogin";
+// import SocialLogin from "../Components/SocialLogin";
 import useAuth from "../Hooks/useAuth";
 
 const Login = () => {
@@ -85,7 +85,7 @@ const Login = () => {
                   onClick={handleValidateCaptcha}
                   size="sm"
                   //   color={email ? "gray" : "blue-gray"}
-                  //   disabled={!email}
+                    disabled={disabled}
                   className="!absolute right-0 top-0 bg-black text-white  btn-sm btn rounded"
                 >
                   Invite

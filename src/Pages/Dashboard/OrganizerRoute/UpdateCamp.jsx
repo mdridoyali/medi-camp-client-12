@@ -37,27 +37,27 @@ const UpdateCamp = () => {
         //     }
         // })
         // if (res.data.success) {
-            // now send the menu item to the database with the image url
-         console.log(data)
+        // now send the menu item to the database with the image url
+        console.log(data)
 
-            const campItem = {
-                campName: data.campName,
-                campFees: parseInt(data.campFees),
-                location: data.location,
-                specializedService: data.specializedService,
-                healthProfessional: data.healthProfessional,
-                audience: data.audience,
-                image,
-                scheduleDate: data.scheduleDate,
-                description: data.description,
-                email: user?.email
-            }
-            console.log(campItem)
-            const campRes = await axiosSecure.put(`/camp/${id}`, campItem);
-            console.log(campRes.data)
-            if (campRes.data.modifiedCount > 0) {
-                toast.success(`Camp Update Success`)
-            }
+        const campItem = {
+            campName: data.campName,
+            campFees: parseInt(data.campFees),
+            location: data.location,
+            specializedService: data.specializedService,
+            healthProfessional: data.healthProfessional,
+            audience: data.audience,
+            image,
+            scheduleDate: data.scheduleDate,
+            description: data.description,
+            email: user?.email
+        }
+        console.log(campItem)
+        const campRes = await axiosSecure.put(`/camp/${id}`, campItem);
+        console.log(campRes.data)
+        if (campRes.data.modifiedCount > 0) {
+            toast.success(`Camp Update Success`)
+        }
 
         // }
 
@@ -65,12 +65,12 @@ const UpdateCamp = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className="px-2 md:px-5 mb-14">
+        <div className="px-2 md:px-5  mb-14">
             <Helmet>
                 <title>MediCamp | Update Camp</title>
             </Helmet>
             <SectionHeading heading={'Update A Camp'} ></SectionHeading>
-         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 font-bold md:font-normal " >
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3  font-bold md:font-normal " >
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
@@ -78,7 +78,7 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("campName",{ required: true } )}
+                            {...register("campName", { required: true })}
                             // placeholder="Camp Name"
                             defaultValue={campName}
                             className="input input-bordered" />
@@ -90,7 +90,7 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="number"
-                            {...register("campFees",{ required: true } )}
+                            {...register("campFees", { required: true })}
                             defaultValue={campFees}
                             className="input input-bordered" />
                         {errors.campFees && <span className="text-red-600">Photo URL is required</span>}
@@ -117,7 +117,7 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("specializedService",{ required: true } )}
+                            {...register("specializedService", { required: true })}
                             defaultValue={specializedService}
                             className="input input-bordered" />
                         {errors.specializedService && <span className="text-red-600">Specialized is required</span>}
@@ -132,7 +132,7 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("healthProfessional",{ required: true } )}
+                            {...register("healthProfessional", { required: true })}
                             defaultValue={healthProfessional}
                             className="input input-bordered" />
                         {errors.healthProfessional && <span className="text-red-600">Healthcare is required</span>}
@@ -143,7 +143,7 @@ const UpdateCamp = () => {
                         </label>
                         <input
                             type="text"
-                            {...register("audience",{ required: true } )}
+                            {...register("audience", { required: true })}
                             defaultValue={audience}
                             className="input input-bordered" />
                         {errors.audience && <span className="text-red-600">Targeted Audience is required</span>}
@@ -152,7 +152,7 @@ const UpdateCamp = () => {
 
 
                 {/* row 4 image and time*/}
-                <div className="flex  md:flex-row w-full gap-5">
+                <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="form-control flex-1">
                         <label className="label">
                             <span className="label-text">Choose an Image</span>
@@ -174,7 +174,7 @@ const UpdateCamp = () => {
                         <input
                             type="datetime-local"
                             id="dateTimePicker"
-                            {...register("scheduleDate",{ required: true } )}
+                            {...register("scheduleDate", { required: true })}
                             defaultValue={scheduleDate}
                             className="input input-bordered" />
                         {errors.scheduleDate && <span className="text-red-600">Scheduled Date Required</span>}
@@ -187,7 +187,7 @@ const UpdateCamp = () => {
                         <span className="label-text">Comprehensive Description</span>
                     </label>
                     <textarea
-                        {...register("description",{ required: true } )}
+                        {...register("description", { required: true })}
                         defaultValue={description}
                         className="input input-bordered h-32" ></textarea>
                     {errors.description && <span className="text-red-600">Description Required</span>}

@@ -37,7 +37,8 @@ const AddUpcomingCamp = () => {
                 image: res.data.data.display_url,
                 scheduleDate: data.scheduleDate,
                 description: data.description,
-                organizerEmail: user?.email
+                organizerEmail: user?.email,
+                count: 0
             }
         //    console.log(campItem)
 

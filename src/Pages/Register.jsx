@@ -8,12 +8,19 @@ import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import "@material-tailwind/react/tailwind.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import SocialLogin from "../Components/SocialLogin";
+// import SocialLogin from "../Components/SocialLogin";
 import Swal from "sweetalert2";
 import { ThreeDots } from "react-loader-spinner";
+import {
+    loadCaptchaEnginge,
+    LoadCanvasTemplate,
+    validateCaptcha,
+  } from "react-simple-captcha";
+
+
 
 const Register = () => {
     const axiosPublic = useAxiosPublic()
@@ -22,6 +29,14 @@ const Register = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const location = useLocation();
+    const captchaRef = useRef(null);
+    const [disabled, setDisabled] = useState(true);
+
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, []);
+
 
     const handleRegister = async (e) => {
         setLoading(true)
@@ -85,8 +100,19 @@ const Register = () => {
                     return toast.error("Already have an account", { duration: 3000 });
                 });
         }
-
     };
+
+
+    const handleValidateCaptcha = () => {
+        const user_captcha_value = captchaRef.current.querySelector("input").value;
+        console.log(user_captcha_value);
+        if (validateCaptcha(user_captcha_value)) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+    };
+
 
     return (
         <div className="mx-auto flex w-11/12 items-center justify-center my-10">
@@ -137,8 +163,27 @@ const Register = () => {
                                     {show ? <p>Hide</p> : <p>Show</p>}
                                 </span>
                             </div>
+                            <LoadCanvasTemplate />
+                            <div className="relative flex w-full max-w-[24rem]">
+                                <input
+                                    ref={captchaRef}
+                                    name="captcha"
+                                    type="text"
+                                    placeholder="Captcha Code"
+                                    className="border w-full rounded p-1"
+                                />
+                                <button
+                                    onClick={handleValidateCaptcha}
+                                    size="sm"
+                                    //   color={email ? "gray" : "blue-gray"}
+                                    //   disabled={!email}
+                                    className="!absolute right-0 top-0 bg-black text-white  btn-sm btn rounded"
+                                >
+                                    Invite
+                                </button>
+                            </div>
                         </div>
-                        <button type="submit" className="mt-6 w-full text-white p-1 bg-blue-700">
+                        <button  type="submit" className="mt-6 w-full text-white p-1 bg-blue-700">
                             {!loading ? 'Register' :
                                 <div className="flex justify-center">
                                     <ThreeDots
