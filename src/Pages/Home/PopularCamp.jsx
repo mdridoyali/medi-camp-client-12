@@ -10,10 +10,14 @@ import SectionHeading from "../../Components/sectionHeading";
 import Loading from "../../Components/Loading";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { CardActionArea } from '@mui/material';
+import { useEffect } from 'react';
+import Aos from 'aos';
 
 const PopularCamp = () => {
     const axiosPublic = useAxiosPublic()
-
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+    }, []);
 
     const { data: camps = [], isLoading } = useQuery({
         queryKey: ['six-camps'],
@@ -29,14 +33,15 @@ const PopularCamp = () => {
     return (
         <div className=" mb-10">
             <SectionHeading heading={'Popular Camps'} ></SectionHeading>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto  p-3 md:mx-10 gap-5">
+            <div   data-aos="fade-down"  className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto  p-3 md:mx-10 gap-5">
                 {
                     camps.map((item, idx) => (
-                        <CardActionArea key={idx} sx={{}}>
+                        <CardActionArea   key={idx} sx={{}}>
                             <CardMedia
                                 sx={{ height: 300 }}
                                 image={item.image}
                                 title="green iguana"
+                              
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">{item.campName} </Typography>

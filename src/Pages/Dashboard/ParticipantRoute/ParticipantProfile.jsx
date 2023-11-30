@@ -4,13 +4,26 @@ import useAuth from "../../../Hooks/useAuth";
 import { FaUpload } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import UserData from "../../../Components/UserProfile/UserData";
- 
- 
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+
+
 const ParticipantProfile = () => {
     const { user } = useAuth()
     const [userData] = UserData()
-    const { email, name, userImg, address, mobile, role } = userData
-    console.log(email)
+    const { name, userImg, address, mobile, role } = userData
+
+    const axiosPublic = useAxiosPublic()
+
+    const { data = [], } = useQuery({
+        queryKey: ['registered-camp', user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/registered-camp/${user?.email}`)
+            return res.data
+        }
+    })
+
+
     return (
         <div className="mb-14">
             <Helmet>
@@ -34,7 +47,7 @@ const ParticipantProfile = () => {
                         </div>
                         <div className="p-4 bg-lime-200 rounded-2xl h-fit w-full ">
                             <p>Role</p>
-                            <h2 className="text-xl font-semibold">{role}</h2>
+                            <h2 className="text-xl capitalize font-semibold">{role}</h2>
                         </div>
                     </div>
                     <div className="p-4 mt-5 bg-orange-200 text-center rounded-2xl h-fit w-full ">
@@ -62,8 +75,9 @@ const ParticipantProfile = () => {
                     </div>
                 </div>
             </div>
-            <hr />
-
+            <div className="flex justify-center p-4 mt-5 bg-blue-500 text-center rounded-2xl h-fit w-fit font-bold text-white mx-auto  ">
+                <Link to={'/dashboard/registered-camps'} >Registered Camp Count ({data.length})</Link>
+            </div>
         </div>
     );
 };

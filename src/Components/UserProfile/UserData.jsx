@@ -13,7 +13,6 @@ const UserData = () => {
             return res.data
         }
     })
-    console.log(userData)
     return [userData]
 };
 

@@ -8,10 +8,12 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
 // import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import UserData from "../../../Components/UserProfile/UserData";
 
 
 const UpdateProfile = () => {
     const { user } = useAuth()
+    const [userData] = UserData()
     const email = user?.email
     console.log(email)
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -30,7 +32,7 @@ const UpdateProfile = () => {
         if (res.data.success && user?.email) {
             const userInfo = {
                 name: data.name,
-                profession: data.profession,
+                profession: data.role,
                 address: data.address,
                 mobile: data.mobile,
                 userImg: res.data.data.display_url,
@@ -63,18 +65,18 @@ const UpdateProfile = () => {
                         <input
                             type="text"
                             {...register("name",  { required: true } )}
-                            placeholder="Name"
+                            defaultValue={userData?.name}
                             className="input input-bordered" />
                         {errors.campName && <span className="text-red-600">Name is required</span>}
                     </div>
                     <div className="form-control flex-1">
                         <label className="label">
-                            <span className="label-text">Profession</span>
+                            <span className="label-text">Role</span>
                         </label>
                         <input
                             type="text"
-                            {...register("profession", { required: true } )}
-                            placeholder="Profession"
+                            {...register("role", { required: true } )}
+                            defaultValue={userData?.role}
                             className="input input-bordered" />
                         {errors.campFees && <span className="text-red-600">Photo URL is required</span>}
                     </div>
@@ -90,7 +92,7 @@ const UpdateProfile = () => {
                         <input
                             type="text"
                             {...register("address",  { required: true })}
-                            placeholder="Address"
+                            defaultValue={userData?.address}
                             className="input input-bordered" />
                         {errors.location && <span className="text-red-600">Name is required</span>}
                     </div>
@@ -101,7 +103,7 @@ const UpdateProfile = () => {
                         <input
                             type="number"
                             {...register("mobile",  { required: true })}
-                            placeholder="Mobile"
+                            defaultValue={userData?.mobile}
                             className="input input-bordered" />
                         {errors.specializedService && <span className="text-red-600">Specialized is required</span>}
                     </div>
@@ -116,6 +118,7 @@ const UpdateProfile = () => {
                         <input
                             type="file"
                             {...register('image', { required: true } )}
+                            // defaultValue={userData?.userImg}
                             className="file-input input-bordered w-full  " />
                         {errors.image && <span className="text-red-600">Image is required</span>}
                     </div>

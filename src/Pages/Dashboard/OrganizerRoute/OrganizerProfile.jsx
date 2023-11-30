@@ -36,7 +36,7 @@ const OrganizerProfile = () => {
                         </div>
                         <div className="p-4 bg-lime-200 rounded-2xl h-fit w-full ">
                             <p>Role</p>
-                            <h2 className="text-xl font-semibold">{role}</h2>
+                            <h2 className="text-xl capitalize font-semibold">{role}</h2>
                         </div>
                     </div>
                     <div className="p-4 mt-5 bg-orange-200 text-center rounded-2xl h-fit w-full ">
