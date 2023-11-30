@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Loading from "../Components/Loading";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { CardActionArea } from "@mui/material";
 
 const AvailableCamp = () => {
     const axiosSecure = useAxiosSecure()
@@ -33,7 +34,7 @@ const AvailableCamp = () => {
             <div className="grid md:grid-cols-2 mx-auto  p-3 md:mx-10 gap-5">
                 {
                     camps.map((item, idx) => (
-                        <Card key={idx} sx={{}}>
+                        <CardActionArea key={idx} sx={{}}>
                             <CardMedia
                                 sx={{ height: 300 }}
                                 image={item.image}
@@ -53,7 +54,7 @@ const AvailableCamp = () => {
                                     </Button>
                                 </Link>
                             </CardActions>
-                        </Card>
+                        </CardActionArea>
                     ))
                 }
 

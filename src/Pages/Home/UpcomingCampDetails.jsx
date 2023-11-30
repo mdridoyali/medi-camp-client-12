@@ -4,7 +4,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useUser from "../../Hooks/useUser";
@@ -71,7 +71,7 @@ const UpcomingCampDetails = () => {
             <Helmet><title>MediCamp | CampDetails</title></Helmet>
             <SectionHeading heading={'Upcoming Camp Details'} ></SectionHeading>
 
-            <Card sx={{}}>
+            <CardActionArea sx={{}}>
                 <CardMedia
                     sx={{ height: 400 }}
                     image={image}
@@ -107,7 +107,7 @@ const UpcomingCampDetails = () => {
                         </Link>
                     }
                 </CardActions>
-            </Card>
+            </CardActionArea>
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

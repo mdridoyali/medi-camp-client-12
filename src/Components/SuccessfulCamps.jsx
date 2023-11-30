@@ -1,51 +1,44 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import Loading from "./Loading";
+import SectionHeading from "./sectionHeading";
+import { Button, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import SectionHeading from "../../Components/sectionHeading";
-import Loading from "../../Components/Loading";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { CardActionArea } from '@mui/material';
 
-const UpcomingCamps = () => {
+const SuccessfulCamps = () => {
     const axiosPublic = useAxiosPublic()
-
-
-    const { data = [], isLoading } = useQuery({
-        queryKey: ['upcoming-camp'],
+    const { data: camps = [], isLoading } = useQuery({
+        queryKey: ['three-camps'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/upcoming-camp')
+            const res = await axiosPublic.get('/three-camps')
             return res.data
         }
     })
-    console.log(data)
+    console.log(camps)
 
     if (isLoading) return <Loading />
 
+
     return (
-        <div>
-            <SectionHeading heading={'Upcoming Camps'} ></SectionHeading>
+        <div className=" mb-10">
+            <SectionHeading heading={'Our Successful Camps'} ></SectionHeading>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto  p-3 md:mx-10 gap-5">
-                {data.map((item, idx) => (
+                {
+                    camps.map((item, idx) => (
                         <CardActionArea key={idx} sx={{}}>
                             <CardMedia
-                                sx={{ height: 300 }}
+                                sx={{ height: 200 }}
                                 image={item.image}
                                 title="green iguana"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">{item.campName} </Typography>
                                 <Typography variant="body1"  >Location: {item.location} </Typography>
-                                <Typography variant="body1"  >Schedule Date: {item.scheduleDate} </Typography>
                                 <Typography variant="body1"  >Camp Fees: ${item.campFees} </Typography>
-
+                                <Typography variant="body1"   >Registered Count: {item.count} </Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to={`/upcoming-camp-details/${item._id}`}>
+                                <Link to={`/camp-details/${item._id}`}>
                                     <Button variant="contained" color="primary" >
                                         See Details
                                     </Button>
@@ -60,4 +53,4 @@ const UpcomingCamps = () => {
     );
 };
 
-export default UpcomingCamps;
+export default SuccessfulCamps;

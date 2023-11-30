@@ -28,7 +28,7 @@ const Testimonials = () => {
     return (
 
         <div className='mb-20'>
-            <SectionHeading heading={'Feedback & Rating'} ></SectionHeading>
+            <SectionHeading heading={'Participant Feedback'} ></SectionHeading>
             <div className='w-96 md:w-[720px] lg:w-[1000px] mx-auto '>
                 <Swiper navigation={true} modules={[Navigation, Autoplay]} className="mySwiper">
                     {

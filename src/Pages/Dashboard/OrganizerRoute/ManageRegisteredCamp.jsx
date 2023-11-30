@@ -66,7 +66,7 @@ const ManageRegisteredCamp = () => {
             <Helmet>
                 <title>MediCamp | Manage Register Camps</title>
             </Helmet>
-            <SectionHeading heading={'Manage Register Camps'} />
+            <SectionHeading heading={'Manage Registered Camps'} />
 
             <div className="overflow-x-auto">
                 <table className="table">

@@ -16,7 +16,6 @@ import PrivetRoutes from "./PrivetRoutes";
 import CampDetails from "../Pages/CampDetails";
 import ParticipantProfile from "../Pages/Dashboard/ParticipantRoute/ParticipantProfile";
 import RegisteredCamp from "../Pages/Dashboard/ParticipantRoute/RegisteredCamp";
-// import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/PaymentHistory";
 import Feedback from "../Pages/Dashboard/ParticipantRoute/Feedback";
 import Payment from "../Pages/Dashboard/ParticipantRoute/Payment/Payment";
 import HealthProfessional from './../Pages/Dashboard/HealthProfessionalRoute/HealthProfessional';
@@ -25,6 +24,7 @@ import ManageUpcomingCamps from "../Pages/Dashboard/OrganizerRoute/ManageUpcomin
 import UpcomingCampDetails from "../Pages/Home/UpcomingCampDetails";
 import AcceptedCamps from "../Pages/Dashboard/HealthProfessionalRoute/AcceptedCamps";
 import PaymentHistory from "../Pages/Dashboard/ParticipantRoute/Payment/PaymentHistory";
+import UpdateProfile from "../Pages/Dashboard/OrganizerRoute/UpdateProfile";
 
 
 const router = createBrowserRouter([
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
         element: <PrivetRoutes><OrganizerProfile /></PrivetRoutes>
       },
       {
+        path: 'update-profile',
+        element: <PrivetRoutes><UpdateProfile /></PrivetRoutes>
+      },
+      {
         path: 'add-a-camp',
         element: <PrivetRoutes><AddCamp /></PrivetRoutes>
       },
@@ -91,7 +95,7 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
       },
 
-
+ 
       // for Participant
       {
         path: 'participant-profile',

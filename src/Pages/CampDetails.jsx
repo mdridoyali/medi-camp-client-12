@@ -3,7 +3,7 @@ import SectionHeading from "../Components/sectionHeading";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Typography } from "@mui/material";
 import Loading from "../Components/Loading";
 import useUser from "../Hooks/useUser";
 import toast from "react-hot-toast";
@@ -70,7 +70,7 @@ const CampDetails = () => {
             <Helmet><title>MediCamp | CampDetails</title></Helmet>
             <SectionHeading heading={'Camp Details'} ></SectionHeading>
 
-            <Card sx={{}}>
+            <CardActionArea sx={{}}>
                 <CardMedia
                     sx={{ height: 400 }}
                     image={image}
@@ -104,7 +104,7 @@ const CampDetails = () => {
                             </Link>
                     }
                 </CardActions>
-            </Card>
+            </CardActionArea>
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

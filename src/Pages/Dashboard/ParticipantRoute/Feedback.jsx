@@ -27,7 +27,7 @@ const Feedback = () => {
     const paidRegisteredData = Array.isArray(registeredData)
         ? registeredData.filter(item => item.paymentStatus === 'paid')
         : [];
-    console.log(paidRegisteredData)
+    // console.log(paidRegisteredData)
 
     const handleReview = async (e,) => {
         e.preventDefault()
@@ -46,10 +46,10 @@ const Feedback = () => {
 
         const res = await axiosSecure.post('/feedback', reviewData)
         console.log(res.data)
-        if (res.data.modifiedCount === 1) {
+        if (res.data.insertedId) {
             toast.success('Thanks For Review')
+            e.target.reset()
         }
-
     }
 
     return (

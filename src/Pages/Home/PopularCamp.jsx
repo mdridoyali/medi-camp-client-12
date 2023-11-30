@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import SectionHeading from "../../Components/sectionHeading";
 import Loading from "../../Components/Loading";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { CardActionArea } from '@mui/material';
 
 const PopularCamp = () => {
     const axiosPublic = useAxiosPublic()
@@ -31,7 +32,7 @@ const PopularCamp = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto  p-3 md:mx-10 gap-5">
                 {
                     camps.map((item, idx) => (
-                        <Card key={idx} sx={{}}>
+                        <CardActionArea key={idx} sx={{}}>
                             <CardMedia
                                 sx={{ height: 300 }}
                                 image={item.image}
@@ -52,7 +53,7 @@ const PopularCamp = () => {
                                     </Button>
                                 </Link>
                             </CardActions>
-                        </Card>
+                        </CardActionArea>
                     ))
                 }
 

@@ -1,10 +1,12 @@
 import { FaHome, FaMinus } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import UserData from "./UserProfile/UserData";
 
 
 const OrganizerPage = () => {
-    const { user, logOutUser } = useAuth()
+    const { logOutUser } = useAuth()
+    const [userData] = UserData()
     return (
         <div className="drawer-content">
             <ul className="menu px-4 w-72 min-h-screen space-y-3 bg-base-200 text-base-content">
@@ -88,10 +90,10 @@ const OrganizerPage = () => {
                 <hr />
                 <Link to={"/"} className="btn btn-outline rounded-full flex items-center gap-5 justify-center text-xl "><FaHome /> <p >  Home </p></Link>
                 <div className="flex gap-3 items-center  font-semibold">
-                    <img src={user?.photoURL} className="rounded-full w-14 h-14" />
+                    <img src={userData?.userImg} className="rounded-full w-14 h-14" />
                     <div>
-                        <p className="text-base">{user?.displayName}</p>
-                        <p>{user?.email}</p>
+                        <p className="text-base">{userData?.name}</p>
+                        <p>{userData?.email}</p>
                     </div>
                 </div>
                 <button onClick={() => logOutUser()} className="btn btn-sm  bg-lime-600  w-20 text-white ">Logout</button>
