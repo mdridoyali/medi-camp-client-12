@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import SectionHeading from '../../Components/sectionHeading';
-
+import "./../../assets/364122218_954813995821698_2268309583943494016_n.jpg"
 
 const Testimonials = () => {
     const axiosPublic = useAxiosPublic()
@@ -27,13 +27,13 @@ const Testimonials = () => {
 
     return (
 
-        <div className='mb-20'>
-            <SectionHeading heading={'Participant Feedback'} ></SectionHeading>
-            <div className='w-96 md:w-[720px] lg:w-[1000px] mx-auto '>
+        <div className='py-20 about-us bg-fixed mx-auto my-10 md:my-20'>
+            <div className='w-96 p-10 md:w-[720px] lg:w-[1000px] mx-auto text-white bg-black bg-opacity-60'>
+                <SectionHeading heading={'Participants Feedback'} ></SectionHeading>
                 <Swiper navigation={true} modules={[Navigation, Autoplay]} className="mySwiper">
                     {
                         data?.map(data => <SwiperSlide key={data._id}>
-                            <div className='flex gap-10  justify-center items-center '>
+                            <div className='md:flex gap-10  justify-center items-center '>
                                 <div className='text-center'>
                                     <img src={data.reviewerImg} alt="" className='rounded-full mx-auto w-16 h-16 md:w-28 md:h-28 ' />
                                     <h1 className='font-bold text-lg'>{data?.reviewerName}</h1>

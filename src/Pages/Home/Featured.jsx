@@ -5,7 +5,7 @@ const Featured = () => {
             <div className="md:flex justify-center items-center bg-slate-600  bg-opacity-40 pb-20 pt-12  px-28 mx-auto gap-8 ">
                 <div className="flex-1">
                     {" "}
-                    <img className="" src={''} />
+                    <img className="" src={'https://img.freepik.com/free-vector/gradient-medical-twitch-background_23-2149153631.jpg?size=626&ext=jpg&uid=R119605278&ga=GA1.1.132439167.1700879951&semt=ais'} />
                 </div>
 
                 <div className="space-y-2 text-white flex-1">

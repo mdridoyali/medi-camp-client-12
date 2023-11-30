@@ -3,8 +3,9 @@ import Banner from "../Components/Banner";
 import Testimonials from "./Home/Testimonials";
 import PopularCamp from "./Home/PopularCamp";
 import UpcomingCamps from "./Home/UpcomingCamps";
-import Featured from "./Home/Featured";
+// import Featured from "./Home/Featured";
 import NewsLetter from "./Home/NewsLetter";
+import About from "./Home/About";
 
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
             <PopularCamp />
             <Testimonials/>
             <UpcomingCamps/>
-            <Featured/>
+            <About/>
             <NewsLetter/>
 
         </div>
