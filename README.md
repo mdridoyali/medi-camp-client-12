@@ -11,6 +11,6 @@
   
   ## Technology used
   ### Client Side
-* React, Tailwind, Material Ui, Framer motion, React data table
+* React, Tailwind, Material Ui, Framer motion, Firebase, React data table
   ### Server Side
 * Node.js, Express.js, MongoDB
