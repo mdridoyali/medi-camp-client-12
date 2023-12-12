@@ -92,7 +92,7 @@ const router = createBrowserRouter([
       {
         path: 'update-camp/:id',
         element: <PrivetRoutes><UpdateCamp /></PrivetRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/camp/${params.id}`)
+        loader: ({ params }) => fetch(`https://medi-camp-server.vercel.app/camp/${params.id}`)
       },
 
  
